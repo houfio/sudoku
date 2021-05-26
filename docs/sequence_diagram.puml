@@ -1,0 +1,37 @@
+@startuml
+[-> Game: setState(PLAYING)
+activate Game
+[-> Game: dispatch(EnterCommand())
+
+Game -> PlayingState: enterKey
+activate PlayingState
+Game <-- PlayingState
+deactivate PlayingState
+deactivate Game
+
+[-> Game: setState(DRAFTING)
+activate Game
+[-> Game: dispatch(EnterCommand())
+
+Game -> DraftingState: enterKey
+activate DraftingState
+Game <-- DraftingState
+deactivate DraftingState
+deactivate Game
+@enduml
+
+@startuml
+[-> Sudoku: openController(Controller)
+activate Sudoku
+
+Sudoku -> Controller: createView
+activate Controller
+Sudoku <-- Controller: view instance
+deactivate Controller
+
+Sudoku -> View: getChildren
+activate View
+View -> View: getChildren()
+Sudoku <-- View: array of children
+deactivate View
+@enduml

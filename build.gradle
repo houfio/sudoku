@@ -1,0 +1,15 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.0-RC'
+    id 'application'
+}
+
+group 'io.houf'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'io.houf.sudoku.MainKt'
+}

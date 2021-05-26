@@ -1,0 +1,87 @@
+@startuml
+package util {
+  class SudokuCache
+  note left: Singleton & Dependency Injection
+}
+
+package model {
+  class Game
+  Game -d-> Puzzle
+  Game -> State
+  Game -u-> SudokuCache
+
+  abstract class PuzzleFactory
+  note left: Abstract Factory & Factory Method
+  PuzzleFactory -> SquareVisitor
+
+  PuzzleFactory -u[hidden]-> SixSqPuzzle
+
+  class FourSqFactory extends PuzzleFactory
+  class SixSqFactory extends PuzzleFactory
+  class NineSqFactory extends PuzzleFactory
+  class JigsawFactory extends PuzzleFactory
+  class SamuraiFactory extends PuzzleFactory
+
+  abstract class Puzzle
+  interface Square
+  Puzzle -l-* Square
+
+  class DefaultSquare extends Square
+
+  interface SquareVisitor
+  class PuzzleSquareVisitor extends SquareVisitor
+  note right of SquareVisitor: Visitor
+
+  class FourSqPuzzle extends Puzzle
+  class SixSqPuzzle extends Puzzle
+  class NineSqPuzzle extends Puzzle
+  class JigsawPuzzle extends Puzzle
+  class SamuraiPuzzle extends Puzzle
+
+  abstract class State
+  note right: State
+
+  class PlayState extends State
+  class NoteState extends State
+
+  abstract class Command
+  Command -> Game
+  note left of Command: Command
+
+  class EnterCommand extends Command
+  class StartCommand extends Command
+}
+
+package controller {
+  abstract class Controller
+
+  class OverviewController extends Controller
+  class PuzzleController extends Controller
+}
+
+package widget {
+  abstract class Widget
+  Widget -* Widget
+
+  class ButtonWidget extends Widget
+  class ListWidget extends Widget
+  class SquareWidget extends Widget
+}
+
+package view {
+  abstract class View extends Widget
+  note left of View: Composite
+
+  class OverviewView extends View
+  OverviewView -> OverviewController
+  class PuzzleView extends View
+  PuzzleView -> PuzzleController
+}
+
+class Sudoku
+note right: MVC
+
+Sudoku <-u-> Controller
+Controller -u-> View
+Sudoku -d-> Game
+@enduml
