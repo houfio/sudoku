@@ -2,11 +2,12 @@ package io.houf.sudoku
 
 import io.houf.sudoku.controller.Controller
 import io.houf.sudoku.controller.impl.OverviewController
-import io.houf.sudoku.util.BlackOlive
-import io.houf.sudoku.util.FloralWhite
 import io.houf.sudoku.util.Fonts
+import io.houf.sudoku.util.Gray0
+import io.houf.sudoku.util.Gray500
 import io.houf.sudoku.util.Loop
 import io.houf.sudoku.widget.Widget
+import io.houf.sudoku.widget.impl.FrameWidget
 import java.awt.*
 import java.awt.event.WindowEvent
 import java.util.*
@@ -23,8 +24,8 @@ class Sudoku(private val frame: JFrame) : JPanel() {
     private val controllers = Stack<Controller<*>>()
 
     init {
-        foreground = FloralWhite
-        background = BlackOlive
+        foreground = Gray500
+        background = Gray0
         isFocusable = true
         focusTraversalKeysEnabled = false
         isDoubleBuffered = true
@@ -52,15 +53,28 @@ class Sudoku(private val frame: JFrame) : JPanel() {
             }
 
             controllers.push(controller)
-            widget = controller.createView()
+            reloadView()
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
     }
 
     fun pop() {
+        if (!canPop()) {
+            return
+        }
+
         controllers.pop()
+        reloadView()
+    }
+
+    fun canPop(): Boolean {
+        return controllers.size > 1
+    }
+
+    private fun reloadView() {
         widget = controllers.peek().createView()
+        widget?.addChild(FrameWidget(this))
     }
 
     override fun paintComponent(graphics: Graphics) {
@@ -85,7 +99,7 @@ class Sudoku(private val frame: JFrame) : JPanel() {
 
     fun tabFocus(reverse: Boolean) {
         val widgets = getWidgets()
-        val targets = widgets.filter { it.focusable }
+        val targets = widgets.filter { it.canFocus() }
         val current = widgets.firstOrNull { it.focused }
         var index = targets.indexOf(current) + if (reverse) -1 else 1
 

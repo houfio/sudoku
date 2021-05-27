@@ -2,8 +2,13 @@ package io.houf.sudoku.util
 
 import java.awt.Color
 
-val FloralWhite = Color(255, 252, 242)
-val PaleSilver = Color(204, 197, 185)
-val BlackOlive = Color(64, 61, 57)
-val EerieBlack = Color(37, 36, 34)
-val Flame = Color(235, 94, 40)
+val Gray0 = Color(0x1f1f1f)
+val Gray100 = Color(0x303030)
+val Gray200 = Color(0x404040)
+val Gray300 = Color(0x5f5f5f)
+val Gray400 = Color(0x929292)
+val Gray500 = Color(0xefefef)
+
+val Blue100 = Color(0x364ab2)
+val Blue200 = Color(0x4e6aff)
+val Blue300 = Color(0x6f97ff)

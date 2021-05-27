@@ -7,8 +7,7 @@ open class Widget(
     protected val x: Int,
     protected val y: Int,
     protected val width: Int,
-    protected val height: Int,
-    val focusable: Boolean = true
+    protected val height: Int
 ) {
     private val children: MutableList<Widget> = mutableListOf()
     var hovered: Boolean = false
@@ -76,13 +75,17 @@ open class Widget(
         children.add(widget);
     }
 
-    fun setFocus(focus: Boolean) {
-        focused = focus
-        requestingFocus = false
+    open fun canFocus(): Boolean {
+        return true
     }
 
     fun requestFocus() {
         requestingFocus = true
+    }
+
+    fun setFocus(focus: Boolean) {
+        focused = focus
+        requestingFocus = false
     }
 
     fun forEach(fn: (Widget) -> Unit) {
