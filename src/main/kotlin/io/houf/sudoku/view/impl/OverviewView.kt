@@ -13,17 +13,14 @@ class OverviewView(controller: OverviewController) : View<OverviewController>(
     ButtonWidget("Test", 100, 200) {
         println("click")
     },
-    ButtonWidget("Test 2", 100, 300) {
-        controller.pushGame()
-    },
-    object : ListWidget<Triple<String, String, String>>(0, 400, FrameSize, 200, 64) {
+    object : ListWidget<Triple<String, String, String>>(0, 300, FrameSize, 200, 64) {
         override fun drawItem(item: Triple<String, String, String>, g: Graphics2D) {
             g.color = Gray500
             g.drawString("${item.first} (${item.second})", 12, 24)
         }
 
         override fun clickItem(item: Triple<String, String, String>) {
-            println("clicked ${item.first} (${item.second})")
+            controller.openDetail(item)
         }
     }
 ) {

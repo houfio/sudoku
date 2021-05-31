@@ -9,7 +9,8 @@ import io.houf.sudoku.view.impl.OverviewView
 class OverviewController(sudoku: Sudoku) : Controller<OverviewController>(sudoku) {
     val puzzles = PuzzleReader.readPuzzles()
 
-    fun pushGame() {
+    fun openDetail(puzzle: Triple<String, String, String>) {
+        sudoku.game.puzzle = puzzle
         sudoku.push(GameController::class.java)
     }
 

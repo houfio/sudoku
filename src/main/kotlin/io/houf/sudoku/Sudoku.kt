@@ -2,6 +2,7 @@ package io.houf.sudoku
 
 import io.houf.sudoku.controller.Controller
 import io.houf.sudoku.controller.impl.OverviewController
+import io.houf.sudoku.model.Game
 import io.houf.sudoku.util.Fonts
 import io.houf.sudoku.util.Gray0
 import io.houf.sudoku.util.Gray500
@@ -21,6 +22,7 @@ class Sudoku(private val frame: JFrame) : JPanel() {
     var widget: Widget? = null
         private set
     private val controllers = Stack<Controller<*>>()
+    val game = Game()
 
     init {
         foreground = Gray500
