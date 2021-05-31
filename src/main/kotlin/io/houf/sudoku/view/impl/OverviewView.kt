@@ -1,6 +1,7 @@
 package io.houf.sudoku.view.impl
 
 import io.houf.sudoku.controller.impl.OverviewController
+import io.houf.sudoku.util.PuzzleReader
 import io.houf.sudoku.view.View
 import io.houf.sudoku.widget.impl.ButtonWidget
 import java.awt.Graphics2D

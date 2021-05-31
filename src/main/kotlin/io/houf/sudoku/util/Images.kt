@@ -11,7 +11,7 @@ object Images {
         return if (images.containsKey(image)) {
             images[image]!!
         } else try {
-            val loaded = ImageIO.read(Images::class.java.getResourceAsStream("/images/$image.png"))
+            val loaded = ImageIO.read(this::class.java.getResourceAsStream("/images/$image.png"))
             images[image] = loaded
             loaded
         } catch (e: IOException) {
