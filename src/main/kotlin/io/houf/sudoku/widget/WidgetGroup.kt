@@ -42,6 +42,10 @@ open class WidgetGroup(protected vararg val children: Widget) : Widget(0, 0, 0, 
         children.forEach { it.mouseMove(x, y) }
     }
 
+    override fun mouseScroll(rotation: Int) {
+        children.forEach { it.mouseScroll(rotation) }
+    }
+
     override fun keyType(key: Char) {
         children.forEach { it.keyType(key) }
     }
