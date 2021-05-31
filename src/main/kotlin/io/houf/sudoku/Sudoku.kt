@@ -33,6 +33,7 @@ class Sudoku(private val frame: JFrame) : JPanel() {
 
         addMouseListener(listener)
         addMouseMotionListener(listener)
+        addMouseWheelListener(listener)
         addKeyListener(listener)
 
         push(OverviewController::class.java)

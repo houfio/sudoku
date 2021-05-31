@@ -7,7 +7,7 @@ import javax.swing.JFrame
 class InputListener(
     private val frame: JFrame,
     private val sudoku: Sudoku
-) : MouseListener, MouseMotionListener, KeyListener {
+) : MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
     private var dragPoint: Point? = null
 
     override fun mouseClicked(event: MouseEvent) {
@@ -46,6 +46,10 @@ class InputListener(
 
     override fun mouseMoved(event: MouseEvent) {
         sudoku.widget?.mouseMove(event.x, event.y)
+    }
+
+    override fun mouseWheelMoved(event: MouseWheelEvent) {
+        sudoku.widget?.mouseScroll(event.wheelRotation)
     }
 
     override fun keyTyped(event: KeyEvent) {

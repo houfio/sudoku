@@ -49,7 +49,7 @@ class ButtonWidget(
     override fun update() {
     }
 
-    override fun interact() {
+    override fun interact(click: Boolean) {
         if (!disabled) {
             onClick()
         }
