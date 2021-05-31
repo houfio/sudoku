@@ -11,7 +11,7 @@ package model {
   Game -u-> SudokuCache
 
   abstract class PuzzleFactory
-  note left: Abstract Factory & Factory Method
+  note left: Abstract Factory
   PuzzleFactory -> SquareVisitor
 
   PuzzleFactory -u[hidden]-> SixSqPuzzle
@@ -53,35 +53,64 @@ package model {
 }
 
 package controller {
-  abstract class Controller
+  abstract class Controller {
+    #sudoku: Sudoku
+    {abstract} +createView(): View
+  }
 
   class OverviewController extends Controller
   class PuzzleController extends Controller
 }
 
 package widget {
-  abstract class Widget
-  Widget -* Widget
+  abstract class Widget {
+    {abstract} +draw(Graphics2D)
+    {abstract} +update()
+  }
+  class WidgetGroup extends Widget {
+    #children: Widget[]
+    +draw(Graphics2D)
+    +update()
+    +getChildren(): List<Widget>
+    +findChild(): Widget
+  }
+  WidgetGroup *-u- Widget
+  note left of Widget: Composite
 
-  class ButtonWidget extends Widget
-  class ListWidget extends Widget
-  class SquareWidget extends Widget
+  class ButtonWidget extends Widget {
+    +draw(Graphics2D)
+    +update()
+  }
+
+  class FrameWidgetGroup extends WidgetGroup {
+    +draw(Graphics2D)
+    +update()
+  }
 }
 
 package view {
-  abstract class View extends Widget
-  note left of View: Composite
+  abstract class View extends WidgetGroup
 
-  class OverviewView extends View
+  class OverviewView extends View {
+    +draw(Graphics2D)
+    +update()
+  }
   OverviewView -> OverviewController
-  class PuzzleView extends View
+  class PuzzleView extends View {
+    +draw(Graphics2D)
+    +update()
+  }
   PuzzleView -> PuzzleController
 }
 
-class Sudoku
-note right: MVC
+class Sudoku {
+  -controller: Controller
+  +openController(Class<Controller>)
+}
+note right: MVC & Factory Method
 
 Sudoku <-u-> Controller
 Controller -u-> View
 Sudoku -d-> Game
+Sudoku -u-> Widget
 @enduml
