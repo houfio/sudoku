@@ -1,22 +1,11 @@
 package io.houf.sudoku.util
 
-import java.io.*
-import java.nio.charset.Charset
-
 object PuzzleReader {
+    private val paths = listOf("puzzle.4x4", "puzzle.6x6", "puzzle.9x9", "puzzle.jigsaw", "puzzle.samurai")
 
-    val  filePaths = listOf("puzzle.4x4", "puzzle.6x6", "puzzle.9x9", "puzzle.jigsaw", "puzzle.samurai")
-
-    fun read(): List<Triple<String, String, String>> {
-        val puzzles = mutableListOf<Triple<String,String,String>>()
-        filePaths.forEach(){
-            val triple = Triple(it.substringBefore('.'), it.substringAfter('.'), readFileUsingGetResource(it))
-           puzzles.add(triple)
-        }
-
-        return puzzles;
+    fun readPuzzles() = paths.map {
+        Triple(it.substringBeforeLast('.'), it.substringAfterLast('.'), readContents(it))
     }
 
-    fun readFileUsingGetResource(fileName: String)
-        = this::class.java.getResource("/puzzles/$fileName").readText(Charsets.UTF_8)
+    private fun readContents(file: String) = this::class.java.getResource("/puzzles/$file")?.readText(Charsets.UTF_8)
 }
