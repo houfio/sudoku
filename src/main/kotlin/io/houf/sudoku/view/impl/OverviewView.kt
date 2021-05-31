@@ -28,13 +28,7 @@ class OverviewView(controller: OverviewController) : View<OverviewController>(
     }
 ) {
     init {
-        findChild<ListWidget<Any>>().setItems(listOf(
-            Triple("Sudoku", "4x4", "test"),
-            Triple("Sudoku", "6x6", "test"),
-            Triple("Sudoku", "9x9", "test"),
-            Triple("Sudoku", "jigsaw", "test"),
-            Triple("Sudoku", "samurai", "test")
-        ))
+        findChild<ListWidget<Any>>().setItems(controller.puzzles)
     }
 
     override fun draw(g: Graphics2D) {
