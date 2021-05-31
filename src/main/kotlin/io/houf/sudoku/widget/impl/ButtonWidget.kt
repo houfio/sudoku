@@ -44,8 +44,9 @@ class ButtonWidget(
             g.color = Gray500
             g.drawRect(x, y, width - 2, height - 2)
         }
+    }
 
-        super.draw(g)
+    override fun update() {
     }
 
     override fun interact() {
