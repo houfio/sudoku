@@ -1,35 +1,26 @@
 package io.houf.sudoku.util
 
-import java.io.IOException
-import java.net.URI
-import java.net.URISyntaxException
-import java.nio.file.*
+import java.nio.file.FileSystems
+import java.nio.file.Files
+import java.nio.file.Paths
 import kotlin.io.path.extension
 import kotlin.io.path.isDirectory
 import kotlin.io.path.nameWithoutExtension
 import kotlin.io.path.readText
-
+import kotlin.streams.toList
 
 object PuzzleReader {
-    
     fun readPuzzles(): List<Triple<String, String, String?>> {
-        val uri: URI = this::class.java.getResource("/puzzles").toURI()
-        val myPath: Path
-        val list = mutableListOf<Triple<String,String,String?>>()
-        if (uri.getScheme().equals("jar")) {
-            val fileSystem: FileSystem = FileSystems.newFileSystem(uri, emptyMap<String, Any>())
-            myPath = fileSystem.getPath("/resources")
+        val uri = this::class.java.getResource("/puzzles")?.toURI() ?: return emptyList()
+
+        val path = if (uri.scheme.equals("jar")) {
+            FileSystems.newFileSystem(uri, emptyMap<String, Any>()).getPath("/resources")
         } else {
-            myPath = Paths.get(uri)
+            Paths.get(uri)
         }
-        val walk = Files.walk(myPath, 1)
-        val it = walk.iterator()
-        while (it.hasNext()) {
-            val file = it.next()
-            if (!file.isDirectory())
-                list.add(
-                    Triple(file.nameWithoutExtension, file.extension, file.readText()))
-        }
-        return list
+
+        return Files.walk(path, 1).filter { !it.isDirectory() }.map {
+            Triple(it.nameWithoutExtension, it.extension, it.readText())
+        }.toList()
     }
 }

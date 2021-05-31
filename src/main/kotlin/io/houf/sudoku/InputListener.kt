@@ -36,7 +36,7 @@ class InputListener(
 
     override fun mouseDragged(event: MouseEvent) {
         if (dragPoint != null) {
-            frame.setLocation(event.locationOnScreen.x - dragPoint!!.x, event.locationOnScreen.y - dragPoint!!.y);
+            frame.setLocation(event.locationOnScreen.x - dragPoint!!.x, event.locationOnScreen.y - dragPoint!!.y)
 
             return
         }

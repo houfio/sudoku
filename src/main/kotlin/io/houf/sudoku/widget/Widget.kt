@@ -9,7 +9,7 @@ abstract class Widget(
     y: Int,
     width: Int,
     height: Int
-): Iterable<Widget> {
+) : Iterable<Widget> {
     var x = x
         protected set
     var y = y
