@@ -7,6 +7,8 @@ import io.houf.sudoku.view.View
 import io.houf.sudoku.view.impl.GameView
 
 class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
+    fun getSize() = sudoku.game.puzzle?.size ?: 1
+
     fun getTile(x: Int, y: Int) = sudoku.game.puzzle?.getTile(x, y)
 
     fun forEachTile(fn: (Int, Int, Tile) -> Unit) = sudoku.game.puzzle?.forEachTile(fn)
