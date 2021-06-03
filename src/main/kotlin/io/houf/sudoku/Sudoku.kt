@@ -3,10 +3,10 @@ package io.houf.sudoku
 import io.houf.sudoku.controller.Controller
 import io.houf.sudoku.controller.impl.OverviewController
 import io.houf.sudoku.model.Game
+import io.houf.sudoku.util.Loop
 import io.houf.sudoku.util.view.Fonts
 import io.houf.sudoku.util.view.Gray0
 import io.houf.sudoku.util.view.Gray500
-import io.houf.sudoku.util.Loop
 import io.houf.sudoku.widget.Widget
 import java.awt.*
 import java.awt.event.WindowEvent

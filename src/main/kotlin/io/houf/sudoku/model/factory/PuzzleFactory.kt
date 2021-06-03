@@ -4,14 +4,15 @@ import io.houf.sudoku.model.Puzzle
 import io.houf.sudoku.model.PuzzleCandidate
 import io.houf.sudoku.model.visitor.TileVisitor
 
-abstract class PuzzleFactory {
-    abstract fun createPuzzle(candidate: PuzzleCandidate): Puzzle
+interface PuzzleFactory {
+    fun createPuzzle(candidate: PuzzleCandidate): Puzzle
 
-    abstract fun createValidator(): TileVisitor
+    fun createValidator(): TileVisitor
 
     companion object {
         fun get(type: String) = when (type) {
             "4x4" -> FourPuzzleFactory()
+            "jigsaw" -> JigsawPuzzleFactory()
             else -> throw IllegalArgumentException()
         }
     }
