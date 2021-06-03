@@ -15,7 +15,7 @@ object PuzzleReader {
         val uri = this::class.java.getResource("/puzzles")?.toURI() ?: return emptyList()
 
         val path = if (uri.scheme.equals("jar")) {
-            FileSystems.newFileSystem(uri, emptyMap<String, Any>()).getPath("/resources")
+            FileSystems.newFileSystem(uri, emptyMap<String, Any>()).getPath("/puzzles")
         } else {
             Paths.get(uri)
         }

@@ -1,4 +1,4 @@
-package io.houf.sudoku.util
+package io.houf.sudoku.util.view
 
 import java.awt.Font
 import java.awt.GraphicsEnvironment

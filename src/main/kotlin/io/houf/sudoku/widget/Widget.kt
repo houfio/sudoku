@@ -1,6 +1,5 @@
 package io.houf.sudoku.widget
 
-import io.houf.sudoku.util.WidgetIterator
 import java.awt.Graphics2D
 import java.awt.event.KeyEvent
 

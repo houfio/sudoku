@@ -1,8 +1,8 @@
 package io.houf.sudoku.widget.impl
 
-import io.houf.sudoku.util.Blue200
-import io.houf.sudoku.util.Gray100
-import io.houf.sudoku.util.Gray200
+import io.houf.sudoku.util.view.Blue200
+import io.houf.sudoku.util.view.Gray100
+import io.houf.sudoku.util.view.Gray200
 import io.houf.sudoku.widget.Widget
 import java.awt.Cursor
 import java.awt.Graphics2D

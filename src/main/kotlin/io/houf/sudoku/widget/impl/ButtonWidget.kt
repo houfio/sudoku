@@ -1,6 +1,6 @@
 package io.houf.sudoku.widget.impl
 
-import io.houf.sudoku.util.*
+import io.houf.sudoku.util.view.*
 import io.houf.sudoku.widget.Widget
 import java.awt.AlphaComposite
 import java.awt.Cursor

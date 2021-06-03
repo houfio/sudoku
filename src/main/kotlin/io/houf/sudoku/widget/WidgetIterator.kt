@@ -1,7 +1,4 @@
-package io.houf.sudoku.util
-
-import io.houf.sudoku.widget.Widget
-import io.houf.sudoku.widget.WidgetGroup
+package io.houf.sudoku.widget
 
 class WidgetIterator(widget: Widget) : Iterator<Widget> {
     private val widgets = mutableListOf<Widget>()
