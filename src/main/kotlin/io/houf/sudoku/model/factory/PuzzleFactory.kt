@@ -13,6 +13,7 @@ interface PuzzleFactory {
         fun get(type: String) = when (type) {
             "4x4" -> FourPuzzleFactory()
             "jigsaw" -> JigsawPuzzleFactory()
+            "samurai" -> SamuraiPuzzleFactory()
             else -> throw IllegalArgumentException()
         }
     }

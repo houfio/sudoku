@@ -9,7 +9,7 @@ class Puzzle(val size: Int) {
 
     fun setTile(x: Int, y: Int, tile: Tile) {
         if (grid[x][y] != null) {
-            throw IllegalArgumentException()
+            return
         }
 
         grid[x][y] = tile

@@ -15,7 +15,7 @@ class JigsawPuzzleFactory : PuzzleFactory {
             val y = index % puzzle.size
             val (character, group) = tile.split("J")
 
-            puzzle.setTile(x, y, DefaultTile(if (character == "0") null else character[0], group.toInt()))
+            puzzle.setTile(x, y, DefaultTile(if (character == "0") null else character[0], group))
         }
 
         return puzzle
