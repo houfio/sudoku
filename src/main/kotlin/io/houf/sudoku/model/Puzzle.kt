@@ -1,4 +1,17 @@
 package io.houf.sudoku.model
 
-class Puzzle {
+import io.houf.sudoku.model.tile.Tile
+
+class Puzzle(val size: Int) {
+    private val grid = Array(size) {
+        arrayOfNulls<Tile>(size)
+    }
+
+    fun setTile(x: Int, y: Int, tile: Tile) {
+        if (grid[x][y] != null) {
+            throw  IllegalArgumentException()
+        }
+
+        grid[x][y] = tile
+    }
 }
