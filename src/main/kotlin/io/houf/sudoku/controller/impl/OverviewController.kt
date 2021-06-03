@@ -11,7 +11,7 @@ class OverviewController(sudoku: Sudoku) : Controller<OverviewController>(sudoku
     val puzzles = PuzzleReader.readPuzzles()
 
     fun openDetail(puzzle: PuzzleCandidate) {
-        sudoku.game.puzzle = puzzle
+        sudoku.game.puzzleCandidate = puzzle
         sudoku.push(GameController::class.java)
     }
 
