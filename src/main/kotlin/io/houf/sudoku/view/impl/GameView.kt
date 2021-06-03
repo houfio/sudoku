@@ -3,6 +3,7 @@ package io.houf.sudoku.view.impl
 import io.houf.sudoku.FrameSize
 import io.houf.sudoku.controller.impl.GameController
 import io.houf.sudoku.util.view.Gray0
+import io.houf.sudoku.util.view.Gray400
 import io.houf.sudoku.util.view.Gray500
 import io.houf.sudoku.util.view.drawCenteredString
 import io.houf.sudoku.view.View
@@ -16,7 +17,6 @@ class GameView(controller: GameController) : View<GameController>(controller) {
     private var dragging = false
 
     override fun draw(g: Graphics2D) {
-
         g.translate(translationX, translationY)
 
         controller.forEachTile { x, y, tile ->
@@ -25,10 +25,13 @@ class GameView(controller: GameController) : View<GameController>(controller) {
             val xx = offset + x * size
             val yy = offset + y * size
 
-            g.color = Gray500
+            g.color = if ((x + y) % 2 == 0) Gray500 else Gray400
             g.fillRect(xx, yy, size, size)
             g.color = Gray0
-            g.drawCenteredString(tile.value?.toString() ?: "-", xx, yy, size, size)
+
+            tile.value?.let {
+                g.drawCenteredString(it.toString(), xx, yy, size, size)
+            }
 
             val leftGroup = controller.getTile(x - 1, y)?.group ?: -1
             val topGroup = controller.getTile(x, y - 1)?.group ?: -1
