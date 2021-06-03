@@ -2,6 +2,7 @@ package io.houf.sudoku.controller.impl
 
 import io.houf.sudoku.Sudoku
 import io.houf.sudoku.controller.Controller
+import io.houf.sudoku.model.PuzzleCandidate
 import io.houf.sudoku.util.PuzzleReader
 import io.houf.sudoku.view.View
 import io.houf.sudoku.view.impl.OverviewView
@@ -9,7 +10,7 @@ import io.houf.sudoku.view.impl.OverviewView
 class OverviewController(sudoku: Sudoku) : Controller<OverviewController>(sudoku) {
     val puzzles = PuzzleReader.readPuzzles()
 
-    fun openDetail(puzzle: Triple<String, String, String>) {
+    fun openDetail(puzzle: PuzzleCandidate) {
         sudoku.game.puzzle = puzzle
         sudoku.push(GameController::class.java)
     }

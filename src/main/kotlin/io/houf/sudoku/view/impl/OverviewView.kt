@@ -2,6 +2,7 @@ package io.houf.sudoku.view.impl
 
 import io.houf.sudoku.FrameSize
 import io.houf.sudoku.controller.impl.OverviewController
+import io.houf.sudoku.model.PuzzleCandidate
 import io.houf.sudoku.util.Gray500
 import io.houf.sudoku.view.View
 import io.houf.sudoku.widget.impl.ButtonWidget
@@ -13,19 +14,19 @@ class OverviewView(controller: OverviewController) : View<OverviewController>(
     ButtonWidget("Test", 100, 200) {
         println("click")
     },
-    object : ListWidget<Triple<String, String, String>>(0, 300, FrameSize, 200, 64) {
-        override fun drawItem(item: Triple<String, String, String>, g: Graphics2D) {
+    object : ListWidget<PuzzleCandidate>(0, 300, FrameSize, 200, 64) {
+        override fun drawItem(item: PuzzleCandidate, g: Graphics2D) {
             g.color = Gray500
-            g.drawString("${item.first} (${item.second})", 12, 24)
+            g.drawString("${item.name} (${item.type})", 12, 24)
         }
 
-        override fun clickItem(item: Triple<String, String, String>) {
+        override fun clickItem(item: PuzzleCandidate) {
             controller.openDetail(item)
         }
     }
 ) {
     init {
-        findChild<ListWidget<Any>>().setItems(controller.puzzles)
+        findChild<ListWidget<PuzzleCandidate>>().setItems(controller.puzzles)
     }
 
     override fun draw(g: Graphics2D) {
