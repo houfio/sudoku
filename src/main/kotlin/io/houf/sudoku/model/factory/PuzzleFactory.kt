@@ -10,7 +10,7 @@ abstract class PuzzleFactory {
     abstract fun createValidator(): TileVisitor
 
     companion object {
-        fun get(type: String): PuzzleFactory = when (type) {
+        fun get(type: String) = when (type) {
             "4x4" -> FourPuzzleFactory()
             else -> throw IllegalArgumentException()
         }

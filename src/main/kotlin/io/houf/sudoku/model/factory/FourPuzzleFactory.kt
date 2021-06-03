@@ -14,8 +14,8 @@ class FourPuzzleFactory : PuzzleFactory() {
             val x = index / puzzle.size
             val y = index % puzzle.size
 
-            val groupX = x / 4
-            val groupY = y / 4 * 2
+            val groupX = x / 2
+            val groupY = y / 2 * 2
 
             puzzle.setTile(x, y, DefaultTile(if (character == '0') null else character, groupX + groupY))
         }
