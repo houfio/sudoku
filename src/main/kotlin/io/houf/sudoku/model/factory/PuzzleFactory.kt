@@ -11,9 +11,9 @@ interface PuzzleFactory {
 
     companion object {
         fun get(type: String) = when (type) {
-            "4x4" -> FourPuzzleFactory()
-            "6x6" -> SixPuzzleFactory()
-            "9x9" -> NinePuzzleFactory()
+            "4x4" -> DefaultPuzzleFactory()
+            "6x6" -> DefaultPuzzleFactory()
+            "9x9" -> DefaultPuzzleFactory()
             "jigsaw" -> JigsawPuzzleFactory()
             "samurai" -> SamuraiPuzzleFactory()
             else -> throw IllegalArgumentException()
