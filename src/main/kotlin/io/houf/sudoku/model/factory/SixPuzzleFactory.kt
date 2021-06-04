@@ -14,7 +14,7 @@ class SixPuzzleFactory : PuzzleFactory {
             val x = index % puzzle.size
             val y = index / puzzle.size
             val groupX = x / 3
-            val groupY = y / 3 * 3
+            val groupY = y / 2 * 2
 
             println("$character $x $y")
 
