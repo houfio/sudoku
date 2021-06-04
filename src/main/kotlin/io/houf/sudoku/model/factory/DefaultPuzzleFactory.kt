@@ -10,17 +10,16 @@ class DefaultPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
         val size = Character.getNumericValue(candidate.type[0])
         val puzzle = Puzzle(size)
+        val rows = when (size) {
+            4 -> 2
+            else -> 3
+        }
+        val columns = when (size) {
+            4, 6 -> 2
+            else -> 3
+        }
 
         candidate.content.trim().forEachIndexed { index, character ->
-            val rows = when (size) {
-                4 -> 2
-                else -> 3
-            }
-            val columns = when (size) {
-                4, 6 -> 2
-                else -> 3
-            }
-
             val x = index % puzzle.size
             val y = index / puzzle.size
             val groupX = x / rows

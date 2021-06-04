@@ -17,11 +17,13 @@ class TileWidget(
     override fun draw(g: Graphics2D) {
         g.color = if ((initialX + initialY) % 2 == 0) Gray500 else Gray400
         g.fillRect(x, y, width, height)
-        g.color = Gray0
 
         tile.value?.let {
+            g.color = if (tile.static) Gray300 else Gray0
             g.drawCenteredString(it.toString(), x, y, width, height)
         }
+
+        g.color = Gray0
 
         if (topTile?.group != tile.group && initialY > 0) {
             g.drawLine(x, y - 1, x + TileSize - 1, y - 1)
@@ -31,7 +33,7 @@ class TileWidget(
             g.drawLine(x - 1, y, x - 1, y + TileSize - 1)
         }
 
-        if (focused) {
+        if (focused && !tile.static) {
             g.color = Blue200
             g.drawRect(x, y, width - 2, height - 2)
         }
@@ -43,5 +45,9 @@ class TileWidget(
     override fun updatePosition(x: Int, y: Int) {
         this.x = initialX * TileSize + x
         this.y = initialY * TileSize + y
+    }
+
+    override fun canFocus(): Boolean {
+        return !tile.static
     }
 }
