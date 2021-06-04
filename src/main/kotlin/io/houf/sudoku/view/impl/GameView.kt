@@ -9,7 +9,7 @@ import io.houf.sudoku.widget.impl.TileWidget
 class GameView(controller: GameController) : View<GameController>(
     controller,
     children = controller.getTiles().map { (x, y, tile) ->
-        TileWidget(x, y, tile)
+        TileWidget(x, y, tile, controller.getTile(x, y - 1), controller.getTile(x - 1, y))
     }.toTypedArray(),
     FrameSize / 2 - controller.getSize() * TileSize / 2
 )

@@ -10,7 +10,9 @@ import java.awt.Graphics2D
 class TileWidget(
     private val initialX: Int,
     private val initialY: Int,
-    private val tile: Tile
+    private val tile: Tile,
+    private val topTile: Tile?,
+    private val leftTile: Tile?
 ) : Widget(initialX * TileSize, initialY * TileSize, TileSize, TileSize), Draggable {
     override fun draw(g: Graphics2D) {
         g.color = if ((initialX + initialY) % 2 == 0) Gray500 else Gray400
@@ -19,6 +21,14 @@ class TileWidget(
 
         tile.value?.let {
             g.drawCenteredString(it.toString(), x, y, width, height)
+        }
+
+        if (topTile?.group != tile.group && initialY > 0) {
+            g.drawLine(x, y - 1, x + TileSize - 1, y - 1)
+        }
+
+        if (leftTile?.group != tile.group && initialX > 0) {
+            g.drawLine(x - 1, y, x - 1, y + TileSize - 1)
         }
 
         if (focused) {
