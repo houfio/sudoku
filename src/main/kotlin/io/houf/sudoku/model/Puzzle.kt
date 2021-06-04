@@ -23,13 +23,9 @@ class Puzzle(val size: Int) {
         return grid[x][y]
     }
 
-    fun forEachTile(fn: (Int, Int, Tile) -> Unit) {
-        grid.forEachIndexed { x, rows ->
-            rows.forEachIndexed { y, tile ->
-                if (tile != null) {
-                    fn(x, y, tile)
-                }
-            }
+    fun getTiles() = grid.flatMapIndexed { x, columns ->
+        columns.mapIndexedNotNull { y, tile ->
+            if (tile == null) null else Triple(x, y, tile)
         }
     }
 }

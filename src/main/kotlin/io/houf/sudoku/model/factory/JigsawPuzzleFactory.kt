@@ -11,8 +11,8 @@ class JigsawPuzzleFactory : PuzzleFactory {
         val puzzle = Puzzle(9)
 
         candidate.content.substring(10).trim().split("=").forEachIndexed { index, tile ->
-            val x = index / puzzle.size
-            val y = index % puzzle.size
+            val x = index % puzzle.size
+            val y = index / puzzle.size
             val (character, group) = tile.split("J")
 
             puzzle.setTile(x, y, DefaultTile(if (character == "0") null else character[0], group))

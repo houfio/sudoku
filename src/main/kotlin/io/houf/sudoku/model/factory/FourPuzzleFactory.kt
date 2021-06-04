@@ -11,10 +11,12 @@ class FourPuzzleFactory : PuzzleFactory {
         val puzzle = Puzzle(4)
 
         candidate.content.trim().forEachIndexed { index, character ->
-            val x = index / puzzle.size
-            val y = index % puzzle.size
+            val x = index % puzzle.size
+            val y = index / puzzle.size
             val groupX = x / 2
             val groupY = y / 2 * 2
+
+            println("$character $x $y")
 
             puzzle.setTile(x, y, DefaultTile(if (character == '0') null else character, "${groupX + groupY}"))
         }

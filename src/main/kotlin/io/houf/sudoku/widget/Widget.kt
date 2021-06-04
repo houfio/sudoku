@@ -32,7 +32,7 @@ abstract class Widget(
     open fun mouseClick(x: Int, y: Int) {
         if (hovered) {
             requestFocus()
-            interact(true)
+            interact()
         }
     }
 
@@ -57,11 +57,11 @@ abstract class Widget(
 
     open fun keyPress(key: Int, modifiers: Int) {
         if (focused && (key == KeyEvent.VK_SPACE || key == KeyEvent.VK_ENTER)) {
-            interact(false)
+            interact()
         }
     }
 
-    open fun interact(click: Boolean) {
+    open fun interact() {
     }
 
     open fun getCursor(): Int? {

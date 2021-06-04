@@ -24,8 +24,8 @@ class SamuraiPuzzleFactory : PuzzleFactory {
             }
 
             grid.forEachIndexed { index, character ->
-                val x = index / 9
-                val y = index % 9
+                val x = index % 9
+                val y = index / 9
                 val groupX = x / 3
                 val groupY = y / 3 * 3
 

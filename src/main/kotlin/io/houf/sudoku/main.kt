@@ -5,6 +5,7 @@ import javax.swing.WindowConstants
 
 const val FrameSize = 768
 const val TaskbarSize = 32
+const val TileSize = 64
 
 fun main() {
     val frame = JFrame()

@@ -80,10 +80,8 @@ abstract class ListWidget<T>(x: Int, y: Int, width: Int, height: Int, private va
         offset = offset.coerceIn(bottom, top)
     }
 
-    override fun interact(click: Boolean) {
-        if (click) {
-            selected = hoveredIndex ?: 0
-        }
+    override fun interact() {
+        hoveredIndex?.let { selected = it }
 
         clickItem(items[selected])
     }
