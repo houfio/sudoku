@@ -1,9 +1,10 @@
-package io.houf.sudoku.model.puzzle
+package io.houf.sudoku.model.puzzle.impl
 
-import io.houf.sudoku.model.Puzzle
-import io.houf.sudoku.model.PuzzleCandidate
-import io.houf.sudoku.model.tile.DefaultTile
-import io.houf.sudoku.model.validator.DefaultValidator
+import io.houf.sudoku.model.puzzle.Puzzle
+import io.houf.sudoku.model.puzzle.PuzzleCandidate
+import io.houf.sudoku.model.puzzle.PuzzleFactory
+import io.houf.sudoku.model.tile.impl.DefaultTile
+import io.houf.sudoku.model.validator.impl.DefaultValidator
 import io.houf.sudoku.model.validator.Validator
 
 class DefaultPuzzleFactory : PuzzleFactory {

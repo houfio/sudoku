@@ -2,7 +2,7 @@ package io.houf.sudoku.widget.impl
 
 import io.houf.sudoku.TileSize
 import io.houf.sudoku.model.tile.Tile
-import io.houf.sudoku.util.view.*
+import io.houf.sudoku.util.widget.*
 import io.houf.sudoku.widget.Draggable
 import io.houf.sudoku.widget.Widget
 import java.awt.Graphics2D

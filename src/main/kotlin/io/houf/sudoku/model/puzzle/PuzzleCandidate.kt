@@ -1,4 +1,4 @@
-package io.houf.sudoku.model
+package io.houf.sudoku.model.puzzle
 
 data class PuzzleCandidate(
     val name: String,

@@ -1,4 +1,4 @@
-package io.houf.sudoku.model
+package io.houf.sudoku.model.puzzle
 
 import io.houf.sudoku.model.tile.Tile
 

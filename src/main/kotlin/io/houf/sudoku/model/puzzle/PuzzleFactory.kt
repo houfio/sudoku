@@ -1,7 +1,8 @@
 package io.houf.sudoku.model.puzzle
 
-import io.houf.sudoku.model.Puzzle
-import io.houf.sudoku.model.PuzzleCandidate
+import io.houf.sudoku.model.puzzle.impl.DefaultPuzzleFactory
+import io.houf.sudoku.model.puzzle.impl.JigsawPuzzleFactory
+import io.houf.sudoku.model.puzzle.impl.SamuraiPuzzleFactory
 import io.houf.sudoku.model.validator.Validator
 
 interface PuzzleFactory {
@@ -11,9 +12,7 @@ interface PuzzleFactory {
 
     companion object {
         fun get(type: String) = when (type) {
-            "4x4" -> DefaultPuzzleFactory()
-            "6x6" -> DefaultPuzzleFactory()
-            "9x9" -> DefaultPuzzleFactory()
+            "4x4", "6x6", "9x9" -> DefaultPuzzleFactory()
             "jigsaw" -> JigsawPuzzleFactory()
             "samurai" -> SamuraiPuzzleFactory()
             else -> throw IllegalArgumentException()

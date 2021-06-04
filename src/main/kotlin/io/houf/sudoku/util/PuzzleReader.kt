@@ -1,6 +1,6 @@
 package io.houf.sudoku.util
 
-import io.houf.sudoku.model.PuzzleCandidate
+import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Paths
