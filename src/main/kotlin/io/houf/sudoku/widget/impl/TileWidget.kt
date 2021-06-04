@@ -40,10 +40,6 @@ class TileWidget(
     override fun update() {
     }
 
-    override fun interact() {
-        println("bruh")
-    }
-
     override fun updatePosition(x: Int, y: Int) {
         this.x = initialX * TileSize + x
         this.y = initialY * TileSize + y

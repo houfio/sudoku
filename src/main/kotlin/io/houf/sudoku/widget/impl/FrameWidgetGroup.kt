@@ -24,7 +24,7 @@ class FrameWidgetGroup(controller: Controller<*>) : WidgetGroup(
 
     override fun draw(g: Graphics2D) {
         g.color = Gray200
-        g.fillRect(0, 0, width, height)
+        g.fillRect(x, y, width, height)
 
         g.color = Gray0
         g.font = Fonts.Big
