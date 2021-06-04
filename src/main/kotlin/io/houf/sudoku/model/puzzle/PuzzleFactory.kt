@@ -1,13 +1,13 @@
-package io.houf.sudoku.model.factory
+package io.houf.sudoku.model.puzzle
 
 import io.houf.sudoku.model.Puzzle
 import io.houf.sudoku.model.PuzzleCandidate
-import io.houf.sudoku.model.visitor.TileVisitor
+import io.houf.sudoku.model.validator.Validator
 
 interface PuzzleFactory {
     fun createPuzzle(candidate: PuzzleCandidate): Puzzle
 
-    fun createValidator(): TileVisitor
+    fun createValidator(): Validator
 
     companion object {
         fun get(type: String) = when (type) {

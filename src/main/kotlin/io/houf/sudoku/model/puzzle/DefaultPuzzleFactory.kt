@@ -1,10 +1,10 @@
-package io.houf.sudoku.model.factory
+package io.houf.sudoku.model.puzzle
 
 import io.houf.sudoku.model.Puzzle
 import io.houf.sudoku.model.PuzzleCandidate
 import io.houf.sudoku.model.tile.DefaultTile
-import io.houf.sudoku.model.visitor.DefaultTileVisitor
-import io.houf.sudoku.model.visitor.TileVisitor
+import io.houf.sudoku.model.validator.DefaultValidator
+import io.houf.sudoku.model.validator.Validator
 
 class DefaultPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
@@ -31,7 +31,7 @@ class DefaultPuzzleFactory : PuzzleFactory {
         return puzzle
     }
 
-    override fun createValidator(): TileVisitor {
-        return DefaultTileVisitor()
+    override fun createValidator(): Validator {
+        return DefaultValidator()
     }
 }

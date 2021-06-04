@@ -1,6 +1,6 @@
 package io.houf.sudoku.model
 
-import io.houf.sudoku.model.factory.PuzzleFactory
+import io.houf.sudoku.model.puzzle.PuzzleFactory
 
 class Game {
     var puzzleCandidate: PuzzleCandidate? = null
