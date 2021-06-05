@@ -4,8 +4,8 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.tile.impl.DefaultTile
-import io.houf.sudoku.model.validator.impl.DefaultValidator
 import io.houf.sudoku.model.validator.Validator
+import io.houf.sudoku.model.validator.impl.DefaultValidator
 
 class SamuraiPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
@@ -30,7 +30,7 @@ class SamuraiPuzzleFactory : PuzzleFactory {
                 val groupX = x / 3
                 val groupY = y / 3 * 3
 
-                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(if (character == '0') null else character, "$id${groupX + groupY}"))
+                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(character.toString(), "$id${groupX + groupY}"))
             }
         }
 

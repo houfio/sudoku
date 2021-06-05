@@ -42,7 +42,7 @@ class ButtonWidget(
 
         if (focused && !disabled) {
             g.color = Gray500
-            g.drawRect(x, y, width - 2, height - 2)
+            g.drawRect(x + 1, y + 1, width - 2, height - 2)
         }
     }
 

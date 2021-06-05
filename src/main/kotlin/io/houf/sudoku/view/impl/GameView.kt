@@ -11,7 +11,19 @@ class GameView(controller: GameController) : View<GameController>(
     controller,
     children = arrayOf(
         *controller.getTiles().map { (x, y, tile) ->
-            TileWidget(x, y, tile, controller.getTile(x, y - 1), controller.getTile(x - 1, y))
+            TileWidget(
+                x,
+                y,
+                tile,
+                controller.getTile(x, y - 1),
+                controller.getTile(x - 1, y)
+            ) {
+                if (it == null) {
+                    controller.remove(x, y)
+                } else {
+                    controller.append(x, y, it)
+                }
+            }
         }.toTypedArray(),
         ActionsWidgetGroup()
     ),

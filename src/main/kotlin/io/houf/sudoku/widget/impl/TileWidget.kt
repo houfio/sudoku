@@ -6,13 +6,15 @@ import io.houf.sudoku.util.widget.*
 import io.houf.sudoku.widget.Draggable
 import io.houf.sudoku.widget.Widget
 import java.awt.Graphics2D
+import java.awt.event.KeyEvent
 
 class TileWidget(
     private val initialX: Int,
     private val initialY: Int,
     private val tile: Tile,
     private val topTile: Tile?,
-    private val leftTile: Tile?
+    private val leftTile: Tile?,
+    private val enter: (char: Char?) -> Unit
 ) : Widget(initialX * TileSize, initialY * TileSize, TileSize, TileSize), Draggable {
     override fun draw(g: Graphics2D) {
         g.color = if ((initialX + initialY) % 2 == 0) Gray500 else Gray400
@@ -26,16 +28,16 @@ class TileWidget(
         g.color = Gray0
 
         if (topTile?.group != tile.group && initialY > 0) {
-            g.drawLine(x, y - 1, x + TileSize - 1, y - 1)
+            g.drawLine(x, y, x + TileSize, y)
         }
 
         if (leftTile?.group != tile.group && initialX > 0) {
-            g.drawLine(x - 1, y, x - 1, y + TileSize - 1)
+            g.drawLine(x, y, x, y + TileSize)
         }
 
         if (focused && !tile.static) {
             g.color = Blue200
-            g.drawRect(x, y, width - 2, height - 2)
+            g.drawRect(x + 1, y + 1, width - 2, height - 2)
         }
     }
 
@@ -45,6 +47,18 @@ class TileWidget(
     override fun updatePosition(x: Int, y: Int) {
         this.x = initialX * TileSize + x
         this.y = initialY * TileSize + y
+    }
+
+    override fun keyType(key: Char) {
+        if (focused) {
+            enter(key)
+        }
+    }
+
+    override fun keyPress(key: Int, modifiers: Int) {
+        if (focused && key == KeyEvent.VK_BACK_SPACE) {
+            enter(null)
+        }
     }
 
     override fun canFocus(): Boolean {

@@ -4,8 +4,8 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.tile.impl.DefaultTile
-import io.houf.sudoku.model.validator.impl.DefaultValidator
 import io.houf.sudoku.model.validator.Validator
+import io.houf.sudoku.model.validator.impl.DefaultValidator
 
 class DefaultPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
@@ -26,7 +26,7 @@ class DefaultPuzzleFactory : PuzzleFactory {
             val groupX = x / rows
             val groupY = y / columns * columns
 
-            puzzle.setTile(x, y, DefaultTile(if (character == '0') null else character, "${groupX + groupY}"))
+            puzzle.setTile(x, y, DefaultTile(character.toString(), "${groupX + groupY}"))
         }
 
         return puzzle
