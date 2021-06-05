@@ -7,15 +7,23 @@ import io.houf.sudoku.view.View
 import io.houf.sudoku.view.impl.GameView
 
 class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
+    var errors: List<Pair<Int, Int>> = listOf()
+        private set
+
     fun getSize() = sudoku.game.puzzle?.size ?: 1
 
     fun getTile(x: Int, y: Int) = sudoku.game.puzzle?.getTile(x, y)
 
     fun getTiles() = sudoku.game.puzzle?.getTiles() ?: emptyList()
 
-    fun enter(x: Int, y: Int, char: Char?) = sudoku.game.execute(EnterCommand(x, y, char))
+    fun enter(x: Int, y: Int, char: Char?) {
+        errors = listOf()
+        sudoku.game.execute(EnterCommand(x, y, char))
+    }
 
-    fun validate() = println(sudoku.game.puzzle?.getErrors())
+    fun validate() {
+        errors = sudoku.game.puzzle?.getErrors() ?: listOf()
+    }
 
     fun solve() = sudoku.game.puzzle?.solve()
 

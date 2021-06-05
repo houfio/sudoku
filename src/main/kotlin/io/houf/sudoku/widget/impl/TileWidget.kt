@@ -6,6 +6,7 @@ import io.houf.sudoku.util.widget.*
 import io.houf.sudoku.widget.Draggable
 import io.houf.sudoku.widget.Widget
 import java.awt.Graphics2D
+import java.awt.RenderingHints
 import java.awt.event.KeyEvent
 
 class TileWidget(
@@ -14,11 +15,21 @@ class TileWidget(
     private val tile: Tile,
     private val topTile: Tile?,
     private val leftTile: Tile?,
+    private val error: () -> Boolean,
     private val enter: (char: Char?) -> Unit
 ) : Widget(initialX * TileSize, initialY * TileSize, TileSize, TileSize), Draggable {
     override fun draw(g: Graphics2D) {
         g.color = if ((initialX + initialY) % 2 == 0) Gray500 else Gray400
         g.fillRect(x, y, width, height)
+
+        if (error()) {
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+
+            g.color = Red300
+            g.fillOval(x + height / 4, y + height / 4, width / 2, height / 2)
+
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF)
+        }
 
         tile.value?.let {
             g.color = if (tile.static) Gray300 else Gray0
