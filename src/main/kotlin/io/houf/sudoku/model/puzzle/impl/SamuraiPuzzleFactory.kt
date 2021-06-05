@@ -4,11 +4,11 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.tile.impl.DefaultTile
-import io.houf.sudoku.model.validator.impl.DefaultValidator
+import io.houf.sudoku.model.validator.impl.SamuraiValidator
 
 class SamuraiPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
-        val puzzle = Puzzle(21, DefaultValidator())
+        val puzzle = Puzzle(21, SamuraiValidator())
         val size = 9
         val grids = candidate.content.split("\n", "\r\n")
 
