@@ -6,10 +6,10 @@ import io.houf.sudoku.util.widget.Gray200
 import io.houf.sudoku.widget.WidgetGroup
 import java.awt.Graphics2D
 
-class ActionsWidgetGroup : WidgetGroup(
+class ActionsWidgetGroup(validate: () -> Unit, solve: () -> Unit) : WidgetGroup(
     ButtonWidget("Switch mode", 0, FrameSize - TaskbarSize, 200, TaskbarSize) { },
-    ButtonWidget("Check", FrameSize - 200, FrameSize - TaskbarSize, 100, TaskbarSize) { },
-    ButtonWidget("Solve", FrameSize - 100, FrameSize - TaskbarSize, 100, TaskbarSize) { }
+    ButtonWidget("Check", FrameSize - 200, FrameSize - TaskbarSize, 100, TaskbarSize, validate),
+    ButtonWidget("Solve", FrameSize - 100, FrameSize - TaskbarSize, 100, TaskbarSize, solve)
 ) {
     override fun draw(g: Graphics2D) {
         g.color = Gray200

@@ -4,13 +4,12 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.tile.impl.DefaultTile
-import io.houf.sudoku.model.validator.Validator
 import io.houf.sudoku.model.validator.impl.DefaultValidator
 
 class DefaultPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
         val size = Character.getNumericValue(candidate.type[0])
-        val puzzle = Puzzle(size)
+        val puzzle = Puzzle(size, DefaultValidator())
         val rows = when (size) {
             4 -> 2
             else -> 3
@@ -30,9 +29,5 @@ class DefaultPuzzleFactory : PuzzleFactory {
         }
 
         return puzzle
-    }
-
-    override fun createValidator(): Validator {
-        return DefaultValidator()
     }
 }

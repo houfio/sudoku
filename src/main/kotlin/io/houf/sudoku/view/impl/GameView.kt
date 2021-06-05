@@ -21,7 +21,10 @@ class GameView(controller: GameController) : View<GameController>(
                 controller.enter(x, y, it)
             }
         }.toTypedArray(),
-        ActionsWidgetGroup()
+        ActionsWidgetGroup(
+            { controller.validate() },
+            { controller.solve() }
+        )
     ),
     FrameSize / 2 - controller.getSize() * TileSize / 2
 )

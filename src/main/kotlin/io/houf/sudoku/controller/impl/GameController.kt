@@ -15,6 +15,10 @@ class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
 
     fun enter(x: Int, y: Int, char: Char?) = sudoku.game.execute(EnterCommand(x, y, char))
 
+    fun validate() = println(sudoku.game.puzzle?.getErrors())
+
+    fun solve() = sudoku.game.puzzle?.solve()
+
     override fun createView(): View<GameController> {
         return GameView(this)
     }
