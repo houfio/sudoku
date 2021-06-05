@@ -26,7 +26,7 @@ class DefaultPuzzleFactory : PuzzleFactory {
             val groupX = x / rows
             val groupY = y / columns * columns
 
-            puzzle.setTile(x, y, DefaultTile(character.toString(), "${groupX + groupY}"))
+            puzzle.setTile(x, y, DefaultTile(puzzle.size, character, "${groupX + groupY}"))
         }
 
         return puzzle

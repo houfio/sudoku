@@ -10,6 +10,7 @@ import io.houf.sudoku.model.validator.impl.DefaultValidator
 class SamuraiPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
         val puzzle = Puzzle(21)
+        val size = 9
         val grids = candidate.content.split("\n", "\r\n")
 
         grids.forEachIndexed { id, grid ->
@@ -25,12 +26,12 @@ class SamuraiPuzzleFactory : PuzzleFactory {
             }
 
             grid.forEachIndexed { index, character ->
-                val x = index % 9
-                val y = index / 9
+                val x = index % size
+                val y = index / size
                 val groupX = x / 3
                 val groupY = y / 3 * 3
 
-                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(character.toString(), "$id${groupX + groupY}"))
+                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(size, character, "$id${groupX + groupY}"))
             }
         }
 

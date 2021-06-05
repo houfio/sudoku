@@ -18,11 +18,7 @@ class GameView(controller: GameController) : View<GameController>(
                 controller.getTile(x, y - 1),
                 controller.getTile(x - 1, y)
             ) {
-                if (it == null) {
-                    controller.remove(x, y)
-                } else {
-                    controller.append(x, y, it)
-                }
+                controller.enter(x, y, it)
             }
         }.toTypedArray(),
         ActionsWidgetGroup()

@@ -3,28 +3,23 @@ package io.houf.sudoku.model.command.impl
 import io.houf.sudoku.model.Game
 import io.houf.sudoku.model.command.Command
 
-class RemoveCommand(
+class EnterCommand(
     private val x: Int,
-    private val y: Int
+    private val y: Int,
+    private val char: Char?
 ) : Command<Game> {
-    private var last: Char? = null
+    private var current: Char? = null
 
     override fun execute(context: Game): Boolean {
         context.puzzle?.getTile(x, y)?.let {
-            if (it.value.isEmpty()) {
-                return false
-            }
-
-            last = it.value.last()
-            it.removeChar()
+            current = it.value
+            it.enterChar(char)
         }
 
         return true
     }
 
     override fun rollback(context: Game) {
-        last?.let {
-            context.puzzle?.getTile(x, y)?.appendChar(it)
-        }
+        context.puzzle?.getTile(x, y)?.enterChar(current)
     }
 }
