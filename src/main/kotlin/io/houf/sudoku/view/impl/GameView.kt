@@ -22,6 +22,7 @@ class GameView(controller: GameController) : View<GameController>(
             )
         }.toTypedArray(),
         ActionsWidgetGroup(
+            { controller.switchMode() },
             { controller.validate() },
             { controller.solve() }
         )

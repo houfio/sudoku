@@ -6,8 +6,8 @@ import io.houf.sudoku.util.widget.Gray200
 import io.houf.sudoku.widget.WidgetGroup
 import java.awt.Graphics2D
 
-class ActionsWidgetGroup(validate: () -> Unit, solve: () -> Unit) : WidgetGroup(
-    ButtonWidget("Switch mode", 0, FrameSize - TaskbarSize, 200, TaskbarSize) { },
+class ActionsWidgetGroup(switchMode: () -> Unit, validate: () -> Unit, solve: () -> Unit) : WidgetGroup(
+    ButtonWidget("Switch mode", 0, FrameSize - TaskbarSize, 200, TaskbarSize, switchMode),
     ButtonWidget("Check", FrameSize - 200, FrameSize - TaskbarSize, 100, TaskbarSize, validate),
     ButtonWidget("Solve", FrameSize - 100, FrameSize - TaskbarSize, 100, TaskbarSize, solve)
 ) {
