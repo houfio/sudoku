@@ -1,0 +1,254 @@
+@startuml
+package service {
+  interface PuzzleReader {
+    readPuzzles(): List<PuzzleCandidate>
+  }
+
+  class DefaultPuzzleReader extends PuzzleReader
+
+  note left of PuzzleReader: Dependency Injection
+}
+
+package controller {
+  abstract class Controller {
+    #sudoku: Sudoku
+    {abstract} +createView(): View
+  }
+
+  class OverviewController extends Controller
+  class StartController extends Controller
+  class GameController extends Controller
+
+  OverviewController --> PuzzleReader
+}
+
+package widget {
+  abstract class Widget {
+    Component
+    ..
+    {abstract} +draw(Graphics2D)
+    {abstract} +update()
+  }
+
+  class WidgetGroup extends Widget {
+    Composite
+    ..
+    #children: Widget[]
+    +findChild(): Widget
+  }
+
+  class ButtonWidget extends Widget {
+    Leaf
+    ..
+  }
+
+  class ListWidget extends Widget {
+    Leaf
+    ..
+  }
+
+  class TileWidget extends Widget {
+    Leaf
+    ..
+  }
+
+  class FrameWidgetGroup extends WidgetGroup {
+    Composite
+    ..
+  }
+
+  WidgetGroup *-- Widget
+
+  note top of WidgetGroup: Composite
+}
+
+package view {
+  abstract class View extends WidgetGroup {
+    Composite
+    ..
+  }
+
+  class OverviewView extends View {
+    Composite
+    ..
+  }
+
+  class StartView extends View {
+    Composite
+    ..
+  }
+
+  class GameView extends View {
+    Composite
+    ..
+  }
+
+  View --> Controller
+}
+
+package model {
+  class Game {
+    +execute(Command)
+    +rollback()
+  }
+
+  class GameData {
+    Receiver
+    ..
+  }
+
+  package command {
+    interface Command {
+      Command
+      ..
+      +execute(GameData): Boolean
+      +rollback()
+    }
+
+    class CommandExecutor {
+      Invoker
+      ..
+      +execute(Command)
+      +rollback()
+      +empty(): Boolean
+    }
+
+    class EnterCommand extends Command {
+      Command
+      ..
+    }
+
+    class LoadCommand extends Command {
+      Command
+      ..
+    }
+
+    class StartCommand extends Command {
+      Command
+      ..
+    }
+
+    class SwitchCommand extends Command {
+      Command
+      ..
+    }
+
+    Command *-- CommandExecutor
+
+    note right of Command: Command
+  }
+
+  package tile {
+    class Tile {
+      +accept(TileVisitor)
+    }
+
+    class DefaultTile extends Tile {
+      Element
+      ..
+    }
+
+    interface TileVisitor {
+      Visitor
+      ..
+      +visitDefault(DefaultTile)
+    }
+
+    TileVisitor --> Tile
+
+    note right of TileVisitor: Visitor
+  }
+
+  package solver {
+    interface Solver {
+      Strategy
+      ..
+      +trySolve(Puzzle): Boolean
+      +getErrors(Puzzle): List<Pair>
+    }
+
+    class DefaultSolver extends Solver {
+      Concrete Strategy
+      ..
+    }
+
+    class SamuraiSolver extends Solver {
+      Concrete Strategy
+      ..
+    }
+
+    note bottom of Solver: Strategy
+  }
+
+  package puzzle {
+    class Puzzle {
+      +visitTiles(TileVisitor)
+    }
+
+    class PuzzleCandidate
+
+    interface PuzzleFactory {
+      Abstract Factory
+      ..
+      +createPuzzle(PuzzleCandidate): Puzzle
+    }
+
+    class DefaultPuzzleFactory extends PuzzleFactory {
+      Concrete Factory
+      ..
+    }
+
+    class JigsawPuzzleFactory extends PuzzleFactory {
+      Concrete Factory
+      ..
+    }
+
+    class SamuraiPuzzleFactory extends PuzzleFactory {
+      Concrete Factory
+      ..
+    }
+
+    Puzzle *-- Tile
+    Puzzle --> Solver
+
+    note top of PuzzleFactory: Abstract Factory
+  }
+
+  package state {
+    interface State {
+      State
+      ..
+      +enter(GameData, Int, Int, Char?): Char?
+    }
+
+    class PlayState extends State {
+      Concrete State
+      ..
+    }
+
+    class DraftState extends State {
+      Concrete State
+      ..
+    }
+
+    note right of State: State
+  }
+
+  Game --> GameData
+  Game --> CommandExecutor
+  GameData --> Puzzle
+  GameData --> PuzzleCandidate
+  GameData -u-> State
+}
+
+class Sudoku {
+  -controller: Controller
+  +openController(Class<Controller>)
+}
+
+Sudoku --> Game
+Sudoku <-> Controller
+Sudoku --> Widget
+
+note top of Sudoku: MVC & Factory Method
+@enduml
