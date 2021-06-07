@@ -81,7 +81,7 @@ class Sudoku(private val frame: JFrame) : JPanel() {
 
         g.font = Fonts.Normal
         g.stroke = BasicStroke(2.0f)
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP)
 
         widget?.draw(g)
     }

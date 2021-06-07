@@ -1,16 +1,16 @@
 package io.houf.sudoku.model.puzzle
 
+import io.houf.sudoku.model.solver.Solver
 import io.houf.sudoku.model.tile.Tile
 import io.houf.sudoku.model.tile.TileVisitor
-import io.houf.sudoku.model.validator.Validator
 
-class Puzzle(val size: Int, private val validator: Validator) {
+class Puzzle(val size: Int, private val solver: Solver) {
     private val grid = Array(size) {
         arrayOfNulls<Tile>(size)
     }
 
     fun setTile(x: Int, y: Int, tile: Tile) {
-        if (grid[x][y] != null) {
+        if (x < 0 || y < 0 || x >= size || y >= size) {
             return
         }
 
@@ -31,30 +31,14 @@ class Puzzle(val size: Int, private val validator: Validator) {
         }
     }
 
-    fun getErrors() = validator.getErrors(this)
+    fun getErrors() = solver.getErrors(this)
 
     fun solve() {
         getTiles().forEach {
             it.third.enterChar(null)
         }
 
-        trySolve()
-    }
-
-    private fun trySolve(): Boolean {
-        val (_, _, tile) = getTiles().firstOrNull { it.third.value == null } ?: return true
-
-        tile.validChars.forEach {
-            tile.enterChar(it)
-
-            if (getErrors().isEmpty() && trySolve()) {
-                return true
-            }
-
-            tile.enterChar(null)
-        }
-
-        return false
+        solver.trySolve(this)
     }
 
     fun visitTiles(visitor: TileVisitor) {

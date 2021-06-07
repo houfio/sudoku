@@ -10,6 +10,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    implementation "io.insert-koin:koin-core:3.0.2"
+}
+
 application {
     mainClass = 'io.houf.sudoku.MainKt'
 }

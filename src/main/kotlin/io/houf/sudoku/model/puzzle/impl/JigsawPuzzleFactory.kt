@@ -4,11 +4,11 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.tile.impl.DefaultTile
-import io.houf.sudoku.model.validator.impl.DefaultValidator
+import io.houf.sudoku.model.solver.impl.DefaultSolver
 
 class JigsawPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
-        val puzzle = Puzzle(9, DefaultValidator())
+        val puzzle = Puzzle(9, DefaultSolver())
 
         candidate.content.substring(10).trim().split("=").forEachIndexed { index, tile ->
             val x = index % puzzle.size

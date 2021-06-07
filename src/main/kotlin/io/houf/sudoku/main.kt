@@ -1,5 +1,6 @@
 package io.houf.sudoku
 
+import org.koin.core.context.startKoin
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
@@ -8,6 +9,10 @@ const val TaskbarSize = 32
 const val TileSize = 64
 
 fun main() {
+    startKoin {
+        modules(module)
+    }
+
     val frame = JFrame()
 
     frame.title = "Sudoku"
