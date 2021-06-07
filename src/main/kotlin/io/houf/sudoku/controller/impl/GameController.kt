@@ -8,7 +8,6 @@ import io.houf.sudoku.util.state.PlayState
 import io.houf.sudoku.util.state.State
 import io.houf.sudoku.view.View
 import io.houf.sudoku.view.impl.GameView
-import java.lang.invoke.SwitchPoint
 
 class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
     private var state: State? = null
@@ -27,16 +26,16 @@ class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
     fun getTiles() = sudoku.game.puzzle?.getTiles() ?: emptyList()
 
     fun switchMode(){
-        if (state is PlayState){
-            state = EditorState()
+        state = if (state is PlayState){
+            EditorState()
         }else{
-            state = PlayState()
+            PlayState()
         }
         println(state)
     }
     fun enter(x: Int, y: Int, char: Char?) {
         errors = listOf()
-        sudoku.game.execute(EnterCommand(x, y, char))
+        state?.enter(sudoku, x, y, char)
     }
 
     fun validate() {
