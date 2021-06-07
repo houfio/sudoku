@@ -1,4 +1,4 @@
-package io.houf.sudoku.util.widget
+package io.houf.sudoku.util
 
 import java.awt.Font
 import java.awt.GraphicsEnvironment

@@ -1,4 +1,4 @@
-package io.houf.sudoku.util.widget
+package io.houf.sudoku.util
 
 import java.awt.Graphics2D
 

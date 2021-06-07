@@ -3,10 +3,10 @@ package io.houf.sudoku.widget.impl
 import io.houf.sudoku.FrameSize
 import io.houf.sudoku.TaskbarSize
 import io.houf.sudoku.controller.Controller
-import io.houf.sudoku.util.widget.Fonts
-import io.houf.sudoku.util.widget.Gray0
-import io.houf.sudoku.util.widget.Gray200
-import io.houf.sudoku.util.widget.Images
+import io.houf.sudoku.util.Fonts
+import io.houf.sudoku.util.Gray0
+import io.houf.sudoku.util.Gray200
+import io.houf.sudoku.util.Images
 import io.houf.sudoku.widget.WidgetGroup
 import java.awt.Graphics2D
 

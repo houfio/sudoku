@@ -2,7 +2,7 @@ package io.houf.sudoku.widget.impl
 
 import io.houf.sudoku.FrameSize
 import io.houf.sudoku.TaskbarSize
-import io.houf.sudoku.util.widget.Gray200
+import io.houf.sudoku.util.Gray200
 import io.houf.sudoku.widget.WidgetGroup
 import java.awt.Graphics2D
 

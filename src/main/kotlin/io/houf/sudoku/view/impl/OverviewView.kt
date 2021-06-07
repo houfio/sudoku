@@ -3,7 +3,7 @@ package io.houf.sudoku.view.impl
 import io.houf.sudoku.FrameSize
 import io.houf.sudoku.controller.impl.OverviewController
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
-import io.houf.sudoku.util.widget.Gray500
+import io.houf.sudoku.util.Gray500
 import io.houf.sudoku.view.View
 import io.houf.sudoku.widget.impl.ButtonWidget
 import io.houf.sudoku.widget.impl.ListWidget
