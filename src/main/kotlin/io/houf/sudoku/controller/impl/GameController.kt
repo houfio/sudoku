@@ -30,6 +30,8 @@ class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
 
     fun solve() = sudoku.game.puzzle?.solve()
 
+    fun isNoting() = sudoku.game.state == "note"
+
     override fun createView(): View<GameController> {
         return GameView(this)
     }
