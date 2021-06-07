@@ -29,11 +29,20 @@ abstract class View<T : Controller<T>>(
     }
 
     override fun draw(g: Graphics2D) {
-        children.filterIsInstance<Draggable>().forEach {
-            it.updatePosition(translationX, translationY)
+        val draggables = children.filter { it is Draggable }
+
+        draggables.forEach { widget ->
+            (widget as Draggable).updatePosition(translationX, translationY)
         }
 
-        super.draw(g)
+        draggables.forEach { it.draw(g) }
+
+        drawTop(g)
+
+        children.filterNot { draggables.contains(it) }.forEach { it.draw(g) }
+    }
+
+    open fun drawTop(g: Graphics2D) {
     }
 
     override fun mousePress(x: Int, y: Int) {
