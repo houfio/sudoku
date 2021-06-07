@@ -3,8 +3,16 @@ package io.houf.sudoku.model.state.impl
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.state.State
 
-class EditorState : State {
+class NoteState : State {
+    override val name = "note"
+
     override fun enter(data: GameData, x: Int, y: Int, char: Char?): Char? {
-        TODO("Not yet implemented")
+        if (char == null) {
+            return null
+        }
+
+        data.puzzle?.getTile(x, y)?.enterNote(char)
+
+        return char
     }
 }

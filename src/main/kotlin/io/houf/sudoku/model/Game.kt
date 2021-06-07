@@ -11,6 +11,8 @@ class Game {
         get() = data.candidate
     val puzzle
         get() = data.puzzle
+    val state
+        get() = data.state.name
 
     fun execute(command: Command<GameData>) {
         executor.execute(command)

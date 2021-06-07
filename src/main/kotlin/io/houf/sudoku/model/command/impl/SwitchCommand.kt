@@ -2,13 +2,13 @@ package io.houf.sudoku.model.command.impl
 
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.command.Command
-import io.houf.sudoku.model.state.impl.EditorState
+import io.houf.sudoku.model.state.impl.NoteState
 import io.houf.sudoku.model.state.impl.PlayState
 
 class SwitchCommand : Command<GameData> {
     override fun execute(context: GameData): Boolean {
         context.state = if (context.state is PlayState) {
-            EditorState()
+            NoteState()
         } else {
             PlayState()
         }

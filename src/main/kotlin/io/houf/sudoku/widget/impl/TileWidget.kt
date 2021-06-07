@@ -37,6 +37,13 @@ class TileWidget(
         }
 
         g.color = Gray0
+        g.font = Fonts.Small
+
+        tile.validChars.filter { tile.isNoted(it) }.forEachIndexed { index, char ->
+            g.drawString(char.toString(), x + 4 + g.fontMetrics.charWidth(char) * index, y + 2 + g.fontMetrics.ascent)
+        }
+
+        g.font = Fonts.Normal
 
         if (topTile?.group != tile.group && initialY > 0) {
             g.drawLine(x, y, x + TileSize, y)

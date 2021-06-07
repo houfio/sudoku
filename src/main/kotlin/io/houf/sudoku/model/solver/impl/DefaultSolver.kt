@@ -10,13 +10,13 @@ open class DefaultSolver : Solver {
         val (_, _, tile) = tiles.firstOrNull { it.third.value == null } ?: return true
 
         tile.validChars.forEach {
-            tile.enterChar(it)
+            tile.enterValue(it)
 
             if (getErrors(tiles).isEmpty() && trySolve(puzzle)) {
                 return true
             }
 
-            tile.enterChar(null)
+            tile.enterValue(null)
         }
 
         return false

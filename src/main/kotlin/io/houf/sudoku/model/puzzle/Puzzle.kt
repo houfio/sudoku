@@ -33,11 +33,14 @@ class Puzzle(val size: Int, private val solver: Solver) {
 
     fun getErrors() = solver.getErrors(this)
 
-    fun solve() {
+    fun reset() {
         getTiles().forEach {
-            it.third.enterChar(null)
+            it.third.enterValue(null)
         }
+    }
 
+    fun solve() {
+        reset()
         solver.trySolve(this)
     }
 

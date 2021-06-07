@@ -17,6 +17,6 @@ class EnterCommand(
     }
 
     override fun rollback(context: GameData) {
-        context.puzzle?.getTile(x, y)?.enterChar(current)
+        context.state.enter(context, x, y, current)
     }
 }
