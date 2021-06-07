@@ -7,7 +7,7 @@ import io.houf.sudoku.view.View
 import io.houf.sudoku.view.impl.StartView
 
 class StartController(sudoku: Sudoku) : Controller<StartController>(sudoku) {
-    fun getPuzzleName() = sudoku.game.puzzleCandidate?.name ?: ""
+    fun getPuzzleName() = sudoku.game.candidate?.name ?: ""
 
     fun startPuzzle() {
         sudoku.game.execute(StartCommand())
