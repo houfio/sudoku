@@ -1,6 +1,7 @@
-package io.houf.sudoku.util
+package io.houf.sudoku.service.impl
 
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
+import io.houf.sudoku.service.PuzzleReader
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -10,8 +11,8 @@ import kotlin.io.path.nameWithoutExtension
 import kotlin.io.path.readText
 import kotlin.streams.toList
 
-object PuzzleReader {
-    fun readPuzzles(): List<PuzzleCandidate> {
+class DefaultPuzzleReader : PuzzleReader {
+    override fun readPuzzles(): List<PuzzleCandidate> {
         val uri = this::class.java.getResource("/puzzles")?.toURI() ?: return emptyList()
 
         val path = if (uri.scheme.equals("jar")) {

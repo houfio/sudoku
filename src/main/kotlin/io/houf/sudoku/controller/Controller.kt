@@ -2,8 +2,9 @@ package io.houf.sudoku.controller
 
 import io.houf.sudoku.Sudoku
 import io.houf.sudoku.view.View
+import org.koin.core.component.KoinComponent
 
-abstract class Controller<T : Controller<T>>(protected val sudoku: Sudoku) {
+abstract class Controller<T : Controller<T>>(protected val sudoku: Sudoku) : KoinComponent {
     abstract fun createView(): View<T>
 
     fun pop() {
