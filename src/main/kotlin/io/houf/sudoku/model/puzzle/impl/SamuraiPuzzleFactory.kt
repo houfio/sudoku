@@ -4,11 +4,11 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.tile.impl.DefaultTile
-import io.houf.sudoku.model.validator.impl.SamuraiValidator
+import io.houf.sudoku.model.solver.impl.SamuraiSolver
 
 class SamuraiPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
-        val puzzle = Puzzle(21, SamuraiValidator())
+        val puzzle = Puzzle(21, SamuraiSolver())
         val size = 9
         val grids = candidate.content.split("\n", "\r\n")
 
@@ -29,8 +29,9 @@ class SamuraiPuzzleFactory : PuzzleFactory {
                 val y = index / size
                 val groupX = x / 3
                 val groupY = y / 3 * 3
+                val current = puzzle.getTile(x + offsetX, y + offsetY)?.group?.get(0)
 
-                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(size, character, "$id${groupX + groupY}"))
+                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(size, character, "$id,${current ?: ""},${groupX + groupY}"))
             }
         }
 
