@@ -4,7 +4,7 @@ import io.houf.sudoku.model.command.Command
 import io.houf.sudoku.model.command.CommandExecutor
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFails
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 internal class CommandExecutorTest {
@@ -42,7 +42,7 @@ internal class CommandExecutorTest {
         executor.execute(ExecutorCommand())
 
         assertTrue { before }
-        assertFails { executor.empty() }
+        assertFalse { executor.empty() }
     }
 }
 

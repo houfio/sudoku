@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 internal class DefaultTileTest {
     @Test
-    fun testSum() {
+    fun testSize() {
         val tile = DefaultTile(9, '0', "")
 
         assertEquals(tile.validChars.size, 9)

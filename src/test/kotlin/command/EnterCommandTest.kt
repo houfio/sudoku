@@ -2,23 +2,36 @@ package command
 
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.command.impl.EnterCommand
-import io.houf.sudoku.model.puzzle.Puzzle
-import io.houf.sudoku.model.solver.impl.DefaultSolver
-import io.houf.sudoku.model.state.State
-import io.houf.sudoku.model.state.impl.PlayState
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import kotlin.test.Test
-import kotlin.test.assertTrue
 
 internal class EnterCommandTest {
-    @Test
-    fun executeTest() {
-        val data = GameData()
+    private fun arrange(): Pair<GameData, EnterCommand> {
+        val data = mock<GameData> {
+            on { state } doReturn mock()
+        }
         val context = EnterCommand(0, 0, '0')
 
-        data.puzzle = Puzzle(9, DefaultSolver())
+        return data to context
+    }
 
-        context.execute(data)
+    @Test
+    fun testExecute() {
+        val (data, command) = arrange()
 
-        
+        command.execute(data)
+
+        verify(data.state).enter(data, 0, 0, '0')
+    }
+
+    @Test
+    fun testRollback() {
+        val (data, command) = arrange()
+
+        command.rollback(data)
+
+        verify(data.state).enter(data, 0, 0, null)
     }
 }
