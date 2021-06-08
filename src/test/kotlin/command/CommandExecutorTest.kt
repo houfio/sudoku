@@ -30,6 +30,7 @@ internal class CommandExecutorTest {
 
         executor.execute(ExecutorCommand())
         executor.rollback()
+        executor.rollback()
 
         assertEquals(context.data, 0)
     }
@@ -44,20 +45,20 @@ internal class CommandExecutorTest {
         assertTrue { before }
         assertFalse { executor.empty() }
     }
-}
 
-internal data class ExecutorContext(
-    var data: Int = 0
-)
+    data class ExecutorContext(
+        var data: Int = 0
+    )
 
-internal class ExecutorCommand : Command<ExecutorContext> {
-    override fun execute(context: ExecutorContext): Boolean {
-        context.data++
+    class ExecutorCommand : Command<ExecutorContext> {
+        override fun execute(context: ExecutorContext): Boolean {
+            context.data++
 
-        return true
-    }
+            return true
+        }
 
-    override fun rollback(context: ExecutorContext) {
-        context.data--
+        override fun rollback(context: ExecutorContext) {
+            context.data--
+        }
     }
 }
