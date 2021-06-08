@@ -1,3 +1,5 @@
+package tile
+
 import io.houf.sudoku.model.tile.impl.DefaultTile
 import kotlin.test.Test
 import kotlin.test.assertEquals
