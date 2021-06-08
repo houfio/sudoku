@@ -1,7 +1,7 @@
 @startuml
 package service {
   interface PuzzleReader {
-    readPuzzles(): List<PuzzleCandidate>
+    +readPuzzles(): List<PuzzleCandidate>
   }
 
   class DefaultPuzzleReader extends PuzzleReader
@@ -177,7 +177,7 @@ package model {
       ..
     }
 
-    note bottom of Solver: Strategy
+    note right of Solver: Strategy
   }
 
   package puzzle {
@@ -211,7 +211,9 @@ package model {
     Puzzle *-- Tile
     Puzzle --> Solver
 
-    note top of PuzzleFactory: Abstract Factory
+    PuzzleCandidate -d[hidden]-> PuzzleFactory
+
+    note left of PuzzleFactory: Abstract Factory
   }
 
   package state {
@@ -241,9 +243,27 @@ package model {
   GameData -u-> State
 }
 
+package util {
+  class Fonts << (O,orange) >> {
+    Singleton
+    ..
+    +Small: Font
+    +Normal: Font
+    +Big: Font
+  }
+
+  class Images << (O,orange) >> {
+    Singleton
+    ..
+    +read(String): Image
+  }
+}
+
+note left of util: Singleton
+
 class Sudoku {
   -controller: Controller
-  +openController(Class<Controller>)
+  +push(Class<Controller>)
 }
 
 Sudoku --> Game
