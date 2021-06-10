@@ -186,7 +186,7 @@ package model {
       ..
     }
 
-    note right of Solver: Strategy
+    note left of Solver: Strategy
   }
 
   package puzzle {
