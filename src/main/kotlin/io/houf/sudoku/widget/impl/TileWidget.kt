@@ -40,7 +40,7 @@ class TileWidget(
         g.font = Fonts.Small
 
         tile.validChars.filter { tile.isNoted(it) }.forEachIndexed { index, char ->
-            g.drawString(char.toString(), x + 4 + g.fontMetrics.charWidth(char) * index, y + 2 + g.fontMetrics.ascent)
+            g.drawString(char.toString(), x + 4 + g.fontMetrics.charWidth(char) * index, y + 14)
         }
 
         g.font = Fonts.Normal
