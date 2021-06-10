@@ -1,6 +1,7 @@
 package io.houf.sudoku.widget.impl
 
 import io.houf.sudoku.TileSize
+import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.model.tile.Tile
 import io.houf.sudoku.util.*
 import io.houf.sudoku.widget.Draggable
@@ -10,16 +11,15 @@ import java.awt.RenderingHints
 import java.awt.event.KeyEvent
 
 class TileWidget(
-    private val initialX: Int,
-    private val initialY: Int,
     private val tile: Tile,
+    private val position: Position,
     private val topTile: Tile?,
     private val leftTile: Tile?,
     private val error: () -> Boolean,
     private val enter: (char: Char?) -> Unit
-) : Widget(initialX * TileSize, initialY * TileSize, TileSize, TileSize), Draggable {
+) : Widget(position.x * TileSize, position.y * TileSize, TileSize, TileSize), Draggable {
     override fun draw(g: Graphics2D) {
-        g.color = if ((initialX + initialY) % 2 == 0) Gray500 else Gray400
+        g.color = if ((position.x + position.y) % 2 == 0) Gray500 else Gray400
         g.fillRect(x, y, width, height)
 
         if (error()) {
@@ -45,11 +45,11 @@ class TileWidget(
 
         g.font = Fonts.Normal
 
-        if (topTile?.group != tile.group && initialY > 0) {
+        if (topTile?.group != tile.group && position.y > 0) {
             g.drawLine(x, y, x + TileSize, y)
         }
 
-        if (leftTile?.group != tile.group && initialX > 0) {
+        if (leftTile?.group != tile.group && position.x > 0) {
             g.drawLine(x, y, x, y + TileSize)
         }
 
@@ -63,8 +63,8 @@ class TileWidget(
     }
 
     override fun updatePosition(x: Int, y: Int) {
-        this.x = initialX * TileSize + x
-        this.y = initialY * TileSize + y
+        this.x = position.x * TileSize + x
+        this.y = position.y * TileSize + y
     }
 
     override fun keyType(key: Char) {

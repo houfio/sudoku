@@ -8,16 +8,16 @@ import kotlin.test.assertNotNull
 
 internal class StartCommandTest {
     private fun arrange(): Pair<GameData, StartCommand> {
-
         val data = GameData()
-        data.candidate = PuzzleCandidate("test","4x4", "1123123")
+        data.candidate = PuzzleCandidate("test", "4x4", "1123123")
+
         val context = StartCommand()
 
         return data to context
     }
 
     @Test
-    fun testExecute(){
+    fun testExecute() {
         val (data, context) = arrange()
 
         context.execute(data)
