@@ -1,4 +1,4 @@
-package state
+package io.houf.sudoku.test.state
 
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.state.impl.PlayState

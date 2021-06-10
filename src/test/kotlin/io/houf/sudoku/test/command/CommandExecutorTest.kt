@@ -1,4 +1,4 @@
-package command
+package io.houf.sudoku.test.command
 
 import io.houf.sudoku.model.command.Command
 import io.houf.sudoku.model.command.CommandExecutor

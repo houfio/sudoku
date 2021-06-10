@@ -1,4 +1,4 @@
-package tile
+package io.houf.sudoku.test.tile
 
 import io.houf.sudoku.model.tile.TileVisitor
 import io.houf.sudoku.model.tile.impl.DefaultTile

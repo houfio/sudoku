@@ -1,4 +1,4 @@
-package command
+package io.houf.sudoku.test.command
 
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.command.impl.EnterCommand
