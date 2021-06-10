@@ -1,39 +1,42 @@
 package state
 
 import io.houf.sudoku.model.GameData
-import io.houf.sudoku.model.command.impl.EnterCommand
 import io.houf.sudoku.model.state.impl.NoteState
+import io.houf.sudoku.model.tile.Position
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
+import org.mockito.kotlin.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class NoteStateTest {
-    private fun arrange(): GameData {
+    private fun arrange(): Pair<NoteState, GameData> {
+        val state = NoteState()
         val data = mock<GameData> {
-            on { state } doReturn NoteState()
+            on { puzzle } doReturn mock()
         }
 
-        return data
+        whenever(data.puzzle?.getTile(any())).thenReturn(mock())
+
+        return state to data
     }
 
     @Test
-    fun testExecuteWithChar(){
-        val data = arrange()
-        val char = '1'
+    fun testEnterChar() {
+        val (state, data) = arrange()
+        val position = Position(1, 1)
+        val value = state.enter(data, position, '0')
 
-        var returns =  data.state.enter(data,1,1, char)
-
-        assertEquals(returns, char)
+        assertEquals(value, '0')
+        verify(data.puzzle)?.getTile(position)
+        verify(data.puzzle?.getTile(position))?.enterNote('0')
     }
+
     @Test
-    fun testExecuteNoChar() {
-        val data = arrange()
+    fun testEnterNull() {
+        val (state, data) = arrange()
+        val value = state.enter(data, Position(1, 1), null)
 
-        var returns =  data.state.enter(data,1,1,null)
-
-       assertNull(returns)
+        assertNull(value)
+        verify(data.puzzle, times(0))?.getTile(any())
     }
 }
