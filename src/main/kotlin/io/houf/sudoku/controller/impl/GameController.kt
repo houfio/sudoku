@@ -4,24 +4,25 @@ import io.houf.sudoku.Sudoku
 import io.houf.sudoku.controller.Controller
 import io.houf.sudoku.model.command.impl.EnterCommand
 import io.houf.sudoku.model.command.impl.SwitchCommand
+import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.view.View
 import io.houf.sudoku.view.impl.GameView
 
 class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
-    var errors: List<Pair<Int, Int>> = listOf()
+    var errors: List<Position> = listOf()
         private set
 
     fun getSize() = sudoku.game.puzzle?.size ?: 1
 
-    fun getTile(x: Int, y: Int) = sudoku.game.puzzle?.getTile(x, y)
+    fun getTile(position: Position) = sudoku.game.puzzle?.getTile(position)
 
     fun getTiles() = sudoku.game.puzzle?.getTiles() ?: emptyList()
 
     fun switchMode() = sudoku.game.execute(SwitchCommand())
 
-    fun enter(x: Int, y: Int, char: Char?) {
+    fun enter(position: Position, char: Char?) {
         errors = listOf()
-        sudoku.game.execute(EnterCommand(x, y, char))
+        sudoku.game.execute(EnterCommand(position, char))
     }
 
     fun validate() {

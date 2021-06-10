@@ -4,6 +4,7 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.solver.impl.DefaultSolver
+import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.model.tile.impl.DefaultTile
 
 class DefaultPuzzleFactory : PuzzleFactory {
@@ -25,7 +26,7 @@ class DefaultPuzzleFactory : PuzzleFactory {
             val groupX = x / rows
             val groupY = y / columns * columns
 
-            puzzle.setTile(x, y, DefaultTile(puzzle.size, character, "${groupX + groupY}"))
+            puzzle.setTile(Position(x, y), DefaultTile(puzzle.size, character, "${groupX + groupY}"))
         }
 
         return puzzle

@@ -4,6 +4,7 @@ import io.houf.sudoku.model.puzzle.Puzzle
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
 import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.solver.impl.SamuraiSolver
+import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.model.tile.impl.DefaultTile
 
 class SamuraiPuzzleFactory : PuzzleFactory {
@@ -29,9 +30,10 @@ class SamuraiPuzzleFactory : PuzzleFactory {
                 val y = index / size
                 val groupX = x / 3
                 val groupY = y / 3 * 3
-                val current = puzzle.getTile(x + offsetX, y + offsetY)?.group?.get(0)
+                val position = Position(x + offsetX, y + offsetY)
+                val current = puzzle.getTile(position)?.group?.get(0)
 
-                puzzle.setTile(x + offsetX, y + offsetY, DefaultTile(size, character, "$id,${current ?: ""},${groupX + groupY}"))
+                puzzle.setTile(position, DefaultTile(size, character, "$id,${current ?: ""},${groupX + groupY}"))
             }
         }
 

@@ -8,9 +8,8 @@ import kotlin.test.assertNotNull
 
 internal class LoadCommandTest {
     private fun arrange(): Pair<GameData, LoadCommand> {
-
         val data = GameData()
-        val candidate = PuzzleCandidate("test","4x4", "1123123")
+        val candidate = PuzzleCandidate("test", "4x4", "1123123")
 
         val context = LoadCommand(candidate)
 
@@ -18,7 +17,7 @@ internal class LoadCommandTest {
     }
 
     @Test
-    fun testExecute(){
+    fun testExecute() {
         val (data, context) = arrange()
 
         context.execute(data)

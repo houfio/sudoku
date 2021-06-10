@@ -9,9 +9,7 @@ import org.koin.core.component.getScopeName
 import kotlin.test.assertEquals
 
 internal class SwitchCommandTest {
-
-    fun arrange(): Pair<GameData, SwitchCommand> {
-
+    private fun arrange(): Pair<GameData, SwitchCommand> {
         val data = GameData()
         data.state = PlayState()
 

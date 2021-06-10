@@ -14,15 +14,14 @@ import java.awt.Graphics2D
 class GameView(controller: GameController) : View<GameController>(
     controller,
     children = arrayOf(
-        *controller.getTiles().map { (x, y, tile) ->
+        *controller.getTiles().map { (tile, position) ->
             TileWidget(
-                x,
-                y,
                 tile,
-                controller.getTile(x, y - 1),
-                controller.getTile(x - 1, y),
-                { controller.errors.any { it.first == x && it.second == y } },
-                { controller.enter(x, y, it) }
+                position,
+                controller.getTile(position.top()),
+                controller.getTile(position.left()),
+                { controller.errors.any { it == position } },
+                { controller.enter(position, it) }
             )
         }.toTypedArray(),
         ButtonWidget("Switch mode", 0, FrameSize - TaskbarSize, 150, TaskbarSize) {

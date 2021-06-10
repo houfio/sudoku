@@ -1,6 +1,8 @@
 package io.houf.sudoku.model.puzzle
 
 import io.houf.sudoku.model.solver.Solver
+import io.houf.sudoku.model.tile.Position
+import io.houf.sudoku.model.tile.PositionedTile
 import io.houf.sudoku.model.tile.Tile
 import io.houf.sudoku.model.tile.TileVisitor
 
@@ -9,33 +11,33 @@ class Puzzle(val size: Int, private val solver: Solver) {
         arrayOfNulls<Tile>(size)
     }
 
-    fun setTile(x: Int, y: Int, tile: Tile) {
-        if (x < 0 || y < 0 || x >= size || y >= size) {
+    fun setTile(position: Position, tile: Tile) {
+        if (!position.inside(size)) {
             return
         }
 
-        grid[x][y] = tile
+        grid[position.x][position.y] = tile
     }
 
-    fun getTile(x: Int, y: Int): Tile? {
-        if (x < 0 || y < 0 || x >= size || y >= size) {
+    fun getTile(position: Position): Tile? {
+        if (!position.inside(size)) {
             return null
         }
 
-        return grid[x][y]
+        return grid[position.x][position.y]
     }
 
     fun getTiles() = grid.flatMapIndexed { x, columns ->
         columns.mapIndexedNotNull { y, tile ->
-            if (tile == null) null else Triple(x, y, tile)
+            if (tile == null) null else PositionedTile(tile, Position(x, y))
         }
     }
 
     fun getErrors() = solver.getErrors(this)
 
     fun reset() {
-        getTiles().forEach {
-            it.third.enterValue(null)
+        getTiles().forEach { (tile) ->
+            tile.enterValue(null)
         }
     }
 
@@ -45,7 +47,7 @@ class Puzzle(val size: Int, private val solver: Solver) {
     }
 
     fun visitTiles(visitor: TileVisitor) {
-        getTiles().forEach { (_, _, tile) ->
+        getTiles().forEach { (tile) ->
             tile.accept(visitor)
         }
     }
