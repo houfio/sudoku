@@ -92,7 +92,7 @@ package model {
     +rollback()
   }
 
-  class GameData {
+  class GameData << (D, pink) >> {
     Receiver
     ..
   }
@@ -143,6 +143,13 @@ package model {
       +accept(TileVisitor)
     }
 
+    class Position << (D, pink) >> {
+      +x: Int
+      +y: Int
+    }
+
+    class PositionedTile << (D, pink) >>
+
     class DefaultTile extends Tile {
       Element
       ..
@@ -155,6 +162,8 @@ package model {
     }
 
     TileVisitor --> Tile
+    PositionedTile --> Tile
+    PositionedTile --> Position
 
     note right of TileVisitor: Visitor
   }
@@ -164,7 +173,7 @@ package model {
       Strategy
       ..
       +trySolve(Puzzle): Boolean
-      +getErrors(Puzzle): List<Pair>
+      +getErrors(Puzzle): List<Position>
     }
 
     class DefaultSolver extends Solver {
@@ -182,14 +191,22 @@ package model {
 
   package puzzle {
     class Puzzle {
+      +setTile(Position, Tile)
+      +getTile(Position): Tile?
+      +getTiles(): List<PositionedTile>
       +visitTiles(TileVisitor)
     }
 
-    class PuzzleCandidate
+    class PuzzleCandidate << (D, pink) >> {
+      +name: String
+      +type: String
+      +content: String
+    }
 
     interface PuzzleFactory {
       Abstract Factory
       ..
+      {static} +get(String): PuzzleFactory
       +createPuzzle(PuzzleCandidate): Puzzle
     }
 
@@ -220,7 +237,7 @@ package model {
     interface State {
       State
       ..
-      +enter(GameData, Int, Int, Char?): Char?
+      +enter(GameData, Position, Char?): Char?
     }
 
     class PlayState extends State {
@@ -244,7 +261,7 @@ package model {
 }
 
 package util {
-  class Fonts << (O,orange) >> {
+  class Fonts << (O, orange) >> {
     Singleton
     ..
     +Small: Font
@@ -252,7 +269,7 @@ package util {
     +Big: Font
   }
 
-  class Images << (O,orange) >> {
+  class Images << (O, orange) >> {
     Singleton
     ..
     +read(String): Image
