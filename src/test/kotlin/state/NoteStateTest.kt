@@ -3,8 +3,8 @@ package state
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.state.impl.NoteState
 import io.houf.sudoku.model.tile.Position
-import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 

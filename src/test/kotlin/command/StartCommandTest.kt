@@ -3,26 +3,25 @@ package command
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.command.impl.StartCommand
 import io.houf.sudoku.model.puzzle.PuzzleCandidate
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 import kotlin.test.assertNotNull
 
 internal class StartCommandTest {
-    private fun arrange(): Pair<GameData, StartCommand> {
-        val data = GameData()
-        data.candidate = PuzzleCandidate("test", "4x4", "1123123")
+    private fun arrange(): Pair<StartCommand, GameData> {
+        val data = GameData().apply {
+            candidate = PuzzleCandidate("test", "4x4", "0000000000000000")
+        }
+        val command = StartCommand()
 
-        val context = StartCommand()
-
-        return data to context
+        return command to data
     }
 
     @Test
     fun testExecute() {
-        val (data, context) = arrange()
+        val (command, data) = arrange()
 
-        context.execute(data)
+        command.execute(data)
 
         assertNotNull(data.puzzle)
     }
-
 }
