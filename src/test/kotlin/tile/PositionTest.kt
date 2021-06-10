@@ -1,51 +1,47 @@
 package tile
 
 import io.houf.sudoku.model.tile.Position
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class PositionTest {
+internal class PositionTest {
+    fun arrange() = Position(5, 5)
 
-    fun arrange(): Position {
-        val position = Position(5,5)
-        return position
-    }
     @Test
-    fun topTest(){
+    fun testTop() {
         val position = arrange()
 
-        val value: Position = position.top()
-
-        assertTrue { value == Position(5,4) }
+        assertEquals(Position(5, 4), position.top())
     }
 
     @Test
-    fun bottomTest(){
+    fun testBottom() {
         val position = arrange()
 
-        val value: Position = position.bottom()
-
-        println(value)
-        assertTrue { value == Position(5,6) }
+        assertEquals(Position(5, 6), position.bottom())
     }
 
     @Test
-    fun leftTest(){
+    fun testLeft() {
         val position = arrange()
 
-        val value: Position = position.left()
-
-        println(value)
-        assertTrue { value == Position(4,5) }
+        assertEquals(Position(4, 5), position.left())
     }
 
     @Test
-    fun rightTest(){
+    fun testRight() {
         val position = arrange()
 
-        val value: Position = position.right()
+        assertEquals(Position(6, 5), position.right())
+    }
 
-        println(value)
-        assertTrue { value == Position(6,5) }
+    @Test
+    fun testInside() {
+        val position = arrange()
+
+        assertFalse { position.inside(5) }
+        assertTrue { position.inside(6) }
     }
 }

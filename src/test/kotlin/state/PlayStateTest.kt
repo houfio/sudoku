@@ -21,7 +21,7 @@ internal class PlayStateTest {
     @Test
     fun testEnter() {
         val (state, data) = arrange()
-        val position = Position(1,1)
+        val position = Position(1, 1)
 
         state.enter(data, position, '0')
 

@@ -3,7 +3,7 @@ package io.houf.sudoku.model.tile.impl
 import io.houf.sudoku.model.tile.Tile
 import io.houf.sudoku.model.tile.TileVisitor
 
-class DefaultTile(size: Int, value: Char, group: String) : Tile(value, group) {
+class DefaultTile(size: Int, value: Char, group: String) : Tile(value, group, '0') {
     override val validChars = Array(size) { index ->
         '1' + index
     }

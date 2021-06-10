@@ -21,7 +21,7 @@ internal class CommandExecutorTest {
 
         executor.execute(ExecutorCommand())
 
-        assertEquals(context.data, 1)
+        assertEquals(1, context.data)
     }
 
     @Test
@@ -32,7 +32,7 @@ internal class CommandExecutorTest {
         executor.rollback()
         executor.rollback()
 
-        assertEquals(context.data, 0)
+        assertEquals(0, context.data)
     }
 
     @Test
@@ -42,8 +42,8 @@ internal class CommandExecutorTest {
 
         executor.execute(ExecutorCommand())
 
-        assertTrue { before }
-        assertFalse { executor.empty() }
+        assertTrue(before)
+        assertFalse(executor.empty())
     }
 
     data class ExecutorContext(

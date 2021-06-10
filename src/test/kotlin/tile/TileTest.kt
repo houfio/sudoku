@@ -2,67 +2,74 @@ package tile
 
 import io.houf.sudoku.model.tile.Tile
 import io.houf.sudoku.model.tile.TileVisitor
-import org.junit.jupiter.api.Test
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
-class TileTest {
+internal class TileTest {
+    fun arrange(static: Boolean = false) = TestTile(if (static) '2' else '0')
 
-    fun arrange(): Tile {
-        val tile = TestTile()
-        return tile
+    @Test
+    fun valueTest() {
+        val tile = arrange()
 
+        tile.enterValue('1')
+
+        assertEquals('1', tile.value)
     }
 
     @Test
-    fun enterValueTest() {
+    fun invalidValueTest() {
         val tile = arrange()
 
         tile.enterValue('2')
-
-        assertEquals('2', tile.value)
-    }
-
-    @Test
-    fun enterInvalidValueTest() {
-        val tile = arrange()
-
-        tile.enterValue('3')
 
         assertEquals(null, tile.value)
     }
 
     @Test
-    fun enterNoteTest(){
+    fun noteTest() {
         val tile = arrange()
 
-        tile.enterNote('2')
+        tile.enterNote('1')
 
-        assertTrue { tile.isNoted('2') }
-    }
-    @Test
-    fun enterInvalidNoteTest(){
-        val tile = arrange()
-
-        tile.enterNote('3')
-        assertFalse { tile.isNoted('3') }
+        assertTrue(tile.isNoted('1'))
     }
 
     @Test
-    fun enterNoteTwiceTest(){
+    fun invalidNoteTest() {
         val tile = arrange()
 
         tile.enterNote('2')
-        tile.enterNote('2')
-        
-        assertFalse { tile.isNoted('2') }
+        assertFalse(tile.isNoted('2'))
     }
-    class TestTile : Tile('0', "") {
-        override val validChars = arrayOf('2')
+
+    @Test
+    fun noteToggleTest() {
+        val tile = arrange()
+
+        tile.enterNote('1')
+        tile.enterNote('1')
+
+        assertFalse(tile.isNoted('1'))
+    }
+
+    @Test
+    fun staticTest() {
+        val tile = arrange(true)
+
+        tile.enterValue('1')
+        tile.enterNote('1')
+
+        assertEquals('2', tile.value)
+        assertFalse(tile.isNoted('1'))
+    }
+
+    class TestTile(char: Char) : Tile(char, "", '0') {
+        override val validChars = arrayOf('1')
 
         override fun accept(visitor: TileVisitor) {
         }
     }
 }
-

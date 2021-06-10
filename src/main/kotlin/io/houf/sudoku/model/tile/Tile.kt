@@ -1,8 +1,8 @@
 package io.houf.sudoku.model.tile
 
-abstract class Tile(value: Char, val group: String) {
+abstract class Tile(value: Char, val group: String, emptyChar: Char) {
     private val notes = mutableListOf<Char>()
-    val static = value != '0'
+    val static = value != emptyChar
     var value = if (static) value else null
         private set
 

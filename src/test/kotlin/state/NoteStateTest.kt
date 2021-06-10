@@ -26,7 +26,7 @@ class NoteStateTest {
         val position = Position(1, 1)
         val value = state.enter(data, position, '0')
 
-        assertEquals(value, '0')
+        assertEquals('0', value)
         verify(data.puzzle)?.getTile(position)
         verify(data.puzzle?.getTile(position))?.enterNote('0')
     }
