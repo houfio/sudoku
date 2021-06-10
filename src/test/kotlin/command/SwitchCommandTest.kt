@@ -4,36 +4,33 @@ import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.command.impl.SwitchCommand
 import io.houf.sudoku.model.state.impl.NoteState
 import io.houf.sudoku.model.state.impl.PlayState
-import org.junit.jupiter.api.Test
-import org.koin.core.component.getScopeName
-import kotlin.test.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertIs
 
 internal class SwitchCommandTest {
-    private fun arrange(): Pair<GameData, SwitchCommand> {
+    private fun arrange(): Pair<SwitchCommand, GameData> {
         val data = GameData()
-        data.state = PlayState()
+        val command = SwitchCommand()
 
-        val context = SwitchCommand()
-
-        return data to context
+        return command to data
     }
 
     @Test
     fun testExecute() {
-        val (data, command) = arrange()
+        val (command, data) = arrange()
 
         command.execute(data)
 
-        assertEquals(data.state.getScopeName(), NoteState().getScopeName())
+        assertIs<NoteState>(data.state)
     }
 
     @Test
     fun testRollback() {
-        val (data, command) = arrange()
+        val (command, data) = arrange()
 
         command.execute(data)
         command.rollback(data)
 
-        assertEquals(data.state.getScopeName(), PlayState().getScopeName())
+        assertIs<PlayState>(data.state)
     }
 }

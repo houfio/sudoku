@@ -8,16 +8,16 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 internal class CommandExecutorTest {
-    private fun arrange(): Pair<ExecutorContext, CommandExecutor<ExecutorContext>> {
+    private fun arrange(): Pair<CommandExecutor<ExecutorContext>, ExecutorContext> {
         val context = ExecutorContext()
         val executor = CommandExecutor(context)
 
-        return context to executor
+        return executor to context
     }
 
     @Test
     fun testExecute() {
-        val (context, executor) = arrange()
+        val (executor, context) = arrange()
 
         executor.execute(ExecutorCommand())
 
@@ -26,7 +26,7 @@ internal class CommandExecutorTest {
 
     @Test
     fun testRollback() {
-        val (context, executor) = arrange()
+        val (executor, context) = arrange()
 
         executor.execute(ExecutorCommand())
         executor.rollback()
@@ -37,7 +37,7 @@ internal class CommandExecutorTest {
 
     @Test
     fun testEmpty() {
-        val (_, executor) = arrange()
+        val (executor) = arrange()
         val before = executor.empty()
 
         executor.execute(ExecutorCommand())

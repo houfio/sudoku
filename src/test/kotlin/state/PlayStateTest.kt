@@ -3,8 +3,8 @@ package state
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.state.impl.PlayState
 import io.houf.sudoku.model.tile.Position
-import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
+import kotlin.test.Test
 
 internal class PlayStateTest {
     private fun arrange(): Pair<PlayState, GameData> {

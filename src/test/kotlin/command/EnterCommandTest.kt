@@ -9,18 +9,18 @@ import org.mockito.kotlin.verify
 import kotlin.test.Test
 
 internal class EnterCommandTest {
-    private fun arrange(): Pair<GameData, EnterCommand> {
+    private fun arrange(): Pair<EnterCommand, GameData> {
         val data = mock<GameData> {
             on { state } doReturn mock()
         }
-        val context = EnterCommand(Position(0, 0), '0')
+        val command = EnterCommand(Position(0, 0), '0')
 
-        return data to context
+        return command to data
     }
 
     @Test
     fun testExecute() {
-        val (data, command) = arrange()
+        val (command, data) = arrange()
 
         command.execute(data)
 
@@ -29,7 +29,7 @@ internal class EnterCommandTest {
 
     @Test
     fun testRollback() {
-        val (data, command) = arrange()
+        val (command, data) = arrange()
 
         command.rollback(data)
 
