@@ -28,7 +28,7 @@ open class DefaultSolver : Solver {
 
     protected open fun getTileCandidates(tiles: List<PositionedTile>) = tiles
 
-    private fun getErrors(tiles: List<PositionedTile>): List<Position> {
+    protected fun getErrors(tiles: List<PositionedTile>): List<Position> {
         val columns = tiles.groupBy({ it.position.x }) { it.tile }
         val rows = tiles.groupBy({ it.position.y }) { it.tile }
         val groups = tiles.groupBy({ it.tile.group }) { it.tile }
