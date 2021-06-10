@@ -46,13 +46,9 @@ class Sudoku(private val frame: JFrame) : JPanel() {
         frame.dispatchEvent(WindowEvent(frame, WindowEvent.WINDOW_CLOSING))
     }
 
-    fun <T : Controller<T>> push(cls: Class<out T>, replace: Boolean = false) {
+    fun <T : Controller<T>> push(cls: Class<out T>) {
         try {
             val controller = cls.getConstructor(Sudoku::class.java).newInstance(this)
-
-            if (replace) {
-                controllers.clear()
-            }
 
             controllers.push(controller)
             widget = controller.createView()
@@ -70,9 +66,7 @@ class Sudoku(private val frame: JFrame) : JPanel() {
         widget = controllers.peek().createView()
     }
 
-    fun canPop(): Boolean {
-        return controllers.size > 1
-    }
+    fun canPop() = controllers.size > 1
 
     override fun paintComponent(graphics: Graphics) {
         super.paintComponent(graphics)

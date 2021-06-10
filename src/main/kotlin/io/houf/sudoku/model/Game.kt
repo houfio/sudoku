@@ -7,8 +7,6 @@ class Game {
     private var data = GameData()
     private val executor = CommandExecutor(data)
 
-    val candidate
-        get() = data.candidate
     val puzzle
         get() = data.puzzle
     val state

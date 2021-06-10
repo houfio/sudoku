@@ -16,7 +16,6 @@ package controller {
   }
 
   class OverviewController extends Controller
-  class StartController extends Controller
   class GameController extends Controller
 
   OverviewController --> PuzzleReader
@@ -73,11 +72,6 @@ package view {
     ..
   }
 
-  class StartView extends View {
-    Composite
-    ..
-  }
-
   class GameView extends View {
     Composite
     ..
@@ -114,11 +108,6 @@ package model {
     }
 
     class EnterCommand extends Command {
-      Command
-      ..
-    }
-
-    class LoadCommand extends Command {
       Command
       ..
     }
@@ -256,7 +245,6 @@ package model {
   Game --> GameData
   Game --> CommandExecutor
   GameData --> Puzzle
-  GameData --> PuzzleCandidate
   GameData -u-> State
 }
 
