@@ -16,7 +16,7 @@ package controller {
   }
 
   class OverviewController extends Controller
-  class GameController extends Controller
+  class PuzzleController extends Controller
 
   OverviewController --> PuzzleReader
 }
@@ -72,7 +72,7 @@ package view {
     ..
   }
 
-  class GameView extends View {
+  class PuzzleView extends View {
     Composite
     ..
   }
@@ -234,7 +234,7 @@ package model {
       ..
     }
 
-    class DraftState extends State {
+    class NoteState extends State {
       Concrete State
       ..
     }

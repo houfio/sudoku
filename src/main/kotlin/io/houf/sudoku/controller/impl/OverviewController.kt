@@ -15,7 +15,7 @@ class OverviewController(sudoku: Sudoku) : Controller<OverviewController>(sudoku
 
     fun start(candidate: PuzzleCandidate) {
         sudoku.game.execute(StartCommand(candidate))
-        sudoku.push(GameController::class.java)
+        sudoku.push(PuzzleController::class.java)
     }
 
     override fun createView(): View<OverviewController> {

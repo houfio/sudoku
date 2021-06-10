@@ -6,9 +6,9 @@ import io.houf.sudoku.model.command.impl.EnterCommand
 import io.houf.sudoku.model.command.impl.SwitchCommand
 import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.view.View
-import io.houf.sudoku.view.impl.GameView
+import io.houf.sudoku.view.impl.PuzzleView
 
-class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
+class PuzzleController(sudoku: Sudoku) : Controller<PuzzleController>(sudoku) {
     var errors: List<Position> = listOf()
         private set
 
@@ -33,7 +33,7 @@ class GameController(sudoku: Sudoku) : Controller<GameController>(sudoku) {
 
     fun isNoting() = sudoku.game.state == "note"
 
-    override fun createView(): View<GameController> {
-        return GameView(this)
+    override fun createView(): View<PuzzleController> {
+        return PuzzleView(this)
     }
 }

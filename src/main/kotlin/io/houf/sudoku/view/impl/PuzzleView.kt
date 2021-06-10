@@ -3,7 +3,7 @@ package io.houf.sudoku.view.impl
 import io.houf.sudoku.FrameSize
 import io.houf.sudoku.TaskbarSize
 import io.houf.sudoku.TileSize
-import io.houf.sudoku.controller.impl.GameController
+import io.houf.sudoku.controller.impl.PuzzleController
 import io.houf.sudoku.util.Gray200
 import io.houf.sudoku.util.Gray500
 import io.houf.sudoku.view.View
@@ -11,7 +11,7 @@ import io.houf.sudoku.widget.impl.ButtonWidget
 import io.houf.sudoku.widget.impl.TileWidget
 import java.awt.Graphics2D
 
-class GameView(controller: GameController) : View<GameController>(
+class PuzzleView(controller: PuzzleController) : View<PuzzleController>(
     controller,
     children = arrayOf(
         *controller.getTiles().map { (tile, position) ->
