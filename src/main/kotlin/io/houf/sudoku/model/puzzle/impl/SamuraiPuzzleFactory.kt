@@ -8,10 +8,14 @@ import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.model.tile.impl.DefaultTile
 
 class SamuraiPuzzleFactory : PuzzleFactory {
-    override fun createPuzzle(candidate: PuzzleCandidate): Puzzle {
+    override fun createPuzzle(candidate: PuzzleCandidate): Puzzle? {
         val puzzle = Puzzle(21, SamuraiSolver())
         val size = 9
         val grids = candidate.content.split("\n", "\r\n")
+
+        if (grids.size != 5) {
+            return null
+        }
 
         grids.forEachIndexed { id, grid ->
             val offsetX = when (id) {
@@ -24,8 +28,13 @@ class SamuraiPuzzleFactory : PuzzleFactory {
                 3, 4 -> 12
                 else -> 6
             }
+            val content = grid.trim()
 
-            grid.forEachIndexed { index, character ->
+            if (content.length != size * size) {
+                return null
+            }
+
+            content.forEachIndexed { index, character ->
                 val x = index % size
                 val y = index / size
                 val groupX = x / 3

@@ -5,7 +5,7 @@ import io.houf.sudoku.model.puzzle.impl.JigsawPuzzleFactory
 import io.houf.sudoku.model.puzzle.impl.SamuraiPuzzleFactory
 
 interface PuzzleFactory {
-    fun createPuzzle(candidate: PuzzleCandidate): Puzzle
+    fun createPuzzle(candidate: PuzzleCandidate): Puzzle?
 
     companion object {
         fun get(type: String) = when (type) {

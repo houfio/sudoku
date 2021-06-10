@@ -11,7 +11,7 @@ import org.koin.core.component.inject
 
 class OverviewController(sudoku: Sudoku) : Controller<OverviewController>(sudoku) {
     private val puzzleReader: PuzzleReader by inject()
-    val puzzles = puzzleReader.readPuzzles()
+    val puzzles = puzzleReader.readPuzzles().sortedBy { it.fullName }
 
     fun openDetail(candidate: PuzzleCandidate) {
         sudoku.game.execute(LoadCommand(candidate))
