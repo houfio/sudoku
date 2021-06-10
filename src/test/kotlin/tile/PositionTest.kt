@@ -2,7 +2,6 @@ package tile
 
 import io.houf.sudoku.model.tile.Position
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class PositionTest {

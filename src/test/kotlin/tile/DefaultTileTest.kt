@@ -1,10 +1,8 @@
 package tile
 
-import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.tile.TileVisitor
 import io.houf.sudoku.model.tile.impl.DefaultTile
 import org.junit.jupiter.api.Assertions.assertArrayEquals
-import org.mockito.Mock
 import org.mockito.kotlin.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
