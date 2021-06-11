@@ -2,14 +2,14 @@ package io.houf.sudoku.test.command
 
 import io.houf.sudoku.model.GameData
 import io.houf.sudoku.model.command.impl.StartCommand
-import io.houf.sudoku.model.puzzle.PuzzleCandidate
+import io.houf.sudoku.test.createCandidate
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 
 internal class StartCommandTest {
     private fun arrange(): Pair<StartCommand, GameData> {
         val data = GameData()
-        val command = StartCommand(PuzzleCandidate("test", "4x4", "0000000000000000"))
+        val command = StartCommand(createCandidate("4x4", 16))
 
         return command to data
     }
