@@ -4,7 +4,8 @@ import io.houf.sudoku.model.solver.Solver
 import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.model.tile.PositionedTile
 import io.houf.sudoku.model.tile.Tile
-import io.houf.sudoku.model.tile.TileVisitor
+import io.houf.sudoku.model.visitor.TileVisitor
+import io.houf.sudoku.model.visitor.impl.ResetTileVisitor
 
 class Puzzle(val size: Int, private val solver: Solver) {
     private val grid = Array(size) {
@@ -35,14 +36,8 @@ class Puzzle(val size: Int, private val solver: Solver) {
 
     fun getErrors() = solver.getErrors(this)
 
-    fun reset() {
-        getTiles().forEach { (tile) ->
-            tile.enterValue(null)
-        }
-    }
-
     fun solve() {
-        reset()
+        visitTiles(ResetTileVisitor())
         solver.trySolve(this)
     }
 

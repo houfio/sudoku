@@ -32,7 +32,7 @@ class TileWidget(
         }
 
         tile.value?.let {
-            g.color = if (tile.static) Gray300 else Gray0
+            g.color = if (tile.validChars.isEmpty()) Gray300 else Gray0
             g.drawCenteredString(it.toString(), x, y, width, height)
         }
 
@@ -53,7 +53,7 @@ class TileWidget(
             g.drawLine(x, y, x, y + TileSize)
         }
 
-        if (focused && !tile.static) {
+        if (focused && tile.validChars.isNotEmpty()) {
             g.color = Blue200
             g.drawRect(x + 1, y + 1, width - 2, height - 2)
         }
@@ -80,6 +80,6 @@ class TileWidget(
     }
 
     override fun canFocus(): Boolean {
-        return !tile.static
+        return tile.validChars.isNotEmpty()
     }
 }

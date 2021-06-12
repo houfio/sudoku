@@ -7,14 +7,15 @@ import io.houf.sudoku.model.tile.PositionedTile
 import io.houf.sudoku.model.tile.Tile
 
 open class DefaultSolver : Solver {
-    override fun trySolve(puzzle: Puzzle): Boolean {
-        val tiles = getTileCandidates(puzzle.getTiles())
+    override fun trySolve(puzzle: Puzzle) = trySolve(puzzle.getTiles())
+
+    protected open fun trySolve(tiles: List<PositionedTile>): Boolean {
         val (tile) = tiles.firstOrNull { it.tile.value == null } ?: return true
 
         tile.validChars.forEach {
             tile.enterValue(it)
 
-            if (getErrors(tiles).isEmpty() && trySolve(puzzle)) {
+            if (getErrors(tiles).isEmpty() && trySolve(tiles)) {
                 return true
             }
 
@@ -26,9 +27,7 @@ open class DefaultSolver : Solver {
 
     override fun getErrors(puzzle: Puzzle) = getErrors(puzzle.getTiles())
 
-    protected open fun getTileCandidates(tiles: List<PositionedTile>) = tiles
-
-    protected fun getErrors(tiles: List<PositionedTile>): List<Position> {
+    protected open fun getErrors(tiles: List<PositionedTile>): List<Position> {
         val columns = tiles.groupBy({ it.position.x }) { it.tile }
         val rows = tiles.groupBy({ it.position.y }) { it.tile }
         val groups = tiles.groupBy({ it.tile.group }) { it.tile }

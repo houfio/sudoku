@@ -1,6 +1,6 @@
 package io.houf.sudoku.test.tile
 
-import io.houf.sudoku.model.tile.TileVisitor
+import io.houf.sudoku.model.visitor.TileVisitor
 import io.houf.sudoku.model.tile.impl.DefaultTile
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.mockito.kotlin.mock
@@ -30,6 +30,6 @@ internal class DefaultTileTest {
 
         tile.accept(visitor)
 
-        verify(visitor).visitDefault(tile)
+        verify(visitor).visit(tile)
     }
 }

@@ -6,6 +6,7 @@ import io.houf.sudoku.model.puzzle.PuzzleFactory
 import io.houf.sudoku.model.solver.impl.SamuraiSolver
 import io.houf.sudoku.model.tile.Position
 import io.houf.sudoku.model.tile.impl.DefaultTile
+import io.houf.sudoku.model.tile.impl.StaticTile
 
 class SamuraiPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle? {
@@ -41,8 +42,10 @@ class SamuraiPuzzleFactory : PuzzleFactory {
                 val groupY = y / 3 * 3
                 val position = Position(x + offsetX, y + offsetY)
                 val current = puzzle.getTile(position)?.group?.get(0)
+                val group = "$id,${current ?: ""},${groupX + groupY}"
+                val tile = if (character == '0') DefaultTile(puzzle.size, group) else StaticTile(character, group)
 
-                puzzle.setTile(position, DefaultTile(size, character, "$id,${current ?: ""},${groupX + groupY}"))
+                puzzle.setTile(position, tile)
             }
         }
 

@@ -1,23 +1,24 @@
 package io.houf.sudoku.model.tile
 
-abstract class Tile(value: Char, val group: String, emptyChar: Char) {
-    private val notes = mutableListOf<Char>()
-    val static = value != emptyChar
-    var value = if (static) value else null
-        private set
+import io.houf.sudoku.model.visitor.TileVisitor
 
-    abstract val validChars: Array<Char>
+abstract class Tile(value: Char?, val group: String) {
+    protected val notes = mutableListOf<Char>()
+    var value = value
+        protected set
 
-    fun enterValue(char: Char?) {
-        if (static || !validCharacter(char)) {
+    open val validChars = arrayOf<Char>()
+
+    open fun enterValue(char: Char?) {
+        if (!validCharacter(char)) {
             return
         }
 
         value = if (value == char) null else char
     }
 
-    fun enterNote(char: Char) {
-        if (static || !validCharacter(char)) {
+    open fun enterNote(char: Char) {
+        if (!validCharacter(char)) {
             return
         }
 
@@ -28,7 +29,7 @@ abstract class Tile(value: Char, val group: String, emptyChar: Char) {
         }
     }
 
-    fun isNoted(char: Char) = notes.contains(char)
+    open fun isNoted(char: Char) = notes.contains(char)
 
     open fun validCharacter(char: Char?) = char == null || validChars.contains(char)
 
