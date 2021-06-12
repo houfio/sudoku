@@ -8,7 +8,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 internal class TileTest {
-    fun arrange(static: Boolean = false) = TestTile(if (static) '2' else '0')
+    fun arrange(static: Boolean = false) = TestTile(if (static) '2' else null)
 
     @Test
     fun valueTest() {
@@ -55,18 +55,7 @@ internal class TileTest {
         assertFalse(tile.isNoted('1'))
     }
 
-    @Test
-    fun staticTest() {
-        val tile = arrange(true)
-
-        tile.enterValue('1')
-        tile.enterNote('1')
-
-        assertEquals('2', tile.value)
-        assertFalse(tile.isNoted('1'))
-    }
-
-    class TestTile(char: Char) : Tile(char, "", '0') {
+    class TestTile(char: Char?) : Tile(char, "") {
         override val validChars = arrayOf('1')
 
         override fun accept(visitor: TileVisitor) {
