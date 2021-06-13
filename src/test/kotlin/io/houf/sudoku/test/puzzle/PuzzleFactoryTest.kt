@@ -10,9 +10,15 @@ import kotlin.test.assertIs
 
 internal class PuzzleFactoryTest {
     @Test
-    fun testDefault() {
+    fun testDefault4x4() {
         assertIs<DefaultPuzzleFactory>(PuzzleFactory.get("4x4"))
+    }
+    @Test
+    fun testDefault6x6() {
         assertIs<DefaultPuzzleFactory>(PuzzleFactory.get("6x6"))
+    }
+    @Test
+    fun testDefault9x9() {
         assertIs<DefaultPuzzleFactory>(PuzzleFactory.get("9x9"))
     }
 

@@ -25,7 +25,6 @@ internal class PlayStateTest {
 
         state.enter(data, position, '0')
 
-        verify(data.puzzle)?.getTile(position)
         verify(data.puzzle?.getTile(position))?.enterValue('0')
     }
 }

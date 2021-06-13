@@ -20,7 +20,6 @@ internal class DefaultTileTest {
     fun testValidChars() {
         val (tile) = arrange()
 
-        assertEquals(6, tile.validChars.size)
         assertArrayEquals(arrayOf('1', '2', '3', '4', '5', '6'), tile.validChars)
     }
 

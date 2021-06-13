@@ -24,10 +24,16 @@ internal class StaticTileTest {
     }
 
     @Test
-    fun testValidChar() {
+    fun testValidCharNull() {
         val (tile) = arrange()
 
         assertFalse(tile.validCharacter(null))
+    }
+
+    @Test
+    fun testValidCharCurrent() {
+        val (tile) = arrange()
+
         assertFalse(tile.validCharacter('1'))
     }
 

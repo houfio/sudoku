@@ -42,6 +42,7 @@ internal class TileTest {
         val tile = arrange()
 
         tile.enterNote('2')
+
         assertFalse(tile.isNoted('2'))
     }
 

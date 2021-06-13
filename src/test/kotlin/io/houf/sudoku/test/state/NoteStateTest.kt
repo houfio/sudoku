@@ -21,22 +21,38 @@ class NoteStateTest {
     }
 
     @Test
-    fun testEnterChar() {
+    fun testEnterCharReturnValue() {
         val (state, data) = arrange()
         val position = Position(1, 1)
         val value = state.enter(data, position, '0')
 
         assertEquals('0', value)
-        verify(data.puzzle)?.getTile(position)
+    }
+
+    @Test
+    fun testEnterCharEntered() {
+        val (state, data) = arrange()
+        val position = Position(1, 1)
+
+        state.enter(data, position, '0')
+
         verify(data.puzzle?.getTile(position))?.enterNote('0')
     }
 
     @Test
-    fun testEnterNull() {
+    fun testEnterNullValue() {
         val (state, data) = arrange()
         val value = state.enter(data, Position(1, 1), null)
 
         assertNull(value)
+    }
+
+    @Test
+    fun testEnterNullEntered() {
+        val (state, data) = arrange()
+
+        state.enter(data, Position(1, 1), null)
+
         verify(data.puzzle, times(0))?.getTile(any())
     }
 }
