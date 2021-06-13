@@ -27,6 +27,9 @@ class PuzzleView(controller: PuzzleController) : View<PuzzleController>(
         ButtonWidget("Switch mode", 0, FrameSize - TaskbarSize, 150, TaskbarSize) {
             controller.switchMode()
         },
+        ButtonWidget("Undo", FrameSize - 225, FrameSize - TaskbarSize, 75, TaskbarSize) {
+            controller.rollback()
+        },
         ButtonWidget("Check", FrameSize - 150, FrameSize - TaskbarSize, 75, TaskbarSize) {
             controller.validate()
         },

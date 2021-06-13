@@ -25,6 +25,8 @@ class PuzzleController(sudoku: Sudoku) : Controller<PuzzleController>(sudoku) {
         sudoku.game.execute(EnterCommand(position, char))
     }
 
+    fun rollback() = sudoku.game.rollback()
+
     fun validate() {
         errors = sudoku.game.puzzle?.getErrors() ?: listOf()
     }
