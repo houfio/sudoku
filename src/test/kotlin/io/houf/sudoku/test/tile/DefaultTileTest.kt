@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 internal class DefaultTileTest {
     private fun arrange(): Pair<DefaultTile, TileVisitor> {

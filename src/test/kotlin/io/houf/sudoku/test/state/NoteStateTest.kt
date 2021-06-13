@@ -21,7 +21,7 @@ class NoteStateTest {
     }
 
     @Test
-    fun testEnterCharReturnValue() {
+    fun testEnterCharValue() {
         val (state, data) = arrange()
         val position = Position(1, 1)
         val value = state.enter(data, position, '0')

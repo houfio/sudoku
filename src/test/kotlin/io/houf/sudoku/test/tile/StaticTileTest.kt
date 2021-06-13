@@ -26,15 +26,17 @@ internal class StaticTileTest {
     @Test
     fun testValidCharNull() {
         val (tile) = arrange()
+        val valid = tile.validCharacter(null)
 
-        assertFalse(tile.validCharacter(null))
+        assertFalse(valid)
     }
 
     @Test
     fun testValidCharCurrent() {
         val (tile) = arrange()
+        val valid = tile.validCharacter('1')
 
-        assertFalse(tile.validCharacter('1'))
+        assertFalse(valid)
     }
 
     @Test

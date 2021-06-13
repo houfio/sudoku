@@ -12,7 +12,7 @@ class SamuraiPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle? {
         val puzzle = Puzzle(21, SamuraiSolver())
         val size = 9
-        val grids = candidate.content.split("\n", "\r\n")
+        val grids = candidate.content.trim().split("\n", "\r\n")
 
         if (grids.size != 5) {
             return null
