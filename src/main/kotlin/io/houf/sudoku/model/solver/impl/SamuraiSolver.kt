@@ -13,6 +13,6 @@ class SamuraiSolver : DefaultSolver() {
             }
         }
 
-        return groups.flatMap { getErrors(it) }.distinct()
+        return groups.flatMap { super.getErrors(it) }.distinct()
     }
 }

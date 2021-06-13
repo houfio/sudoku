@@ -2,8 +2,8 @@ package io.houf.sudoku.test.puzzle
 
 import io.houf.sudoku.model.puzzle.impl.DefaultPuzzleFactory
 import io.houf.sudoku.model.tile.Position
+import io.houf.sudoku.test.countGroups
 import io.houf.sudoku.test.createCandidate
-import io.houf.sudoku.test.groupCount
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -37,7 +37,7 @@ internal class DefaultPuzzleFactoryTest {
         val puzzle = arrange4x4()
 
         assertNotNull(puzzle)
-        assertEquals(4, groupCount(puzzle))
+        assertEquals(4, puzzle.countGroups())
     }
 
     @Test
@@ -63,7 +63,7 @@ internal class DefaultPuzzleFactoryTest {
         val puzzle = arrange6x6()
 
         assertNotNull(puzzle)
-        assertEquals(6, groupCount(puzzle))
+        assertEquals(6, puzzle.countGroups())
     }
 
     @Test
@@ -89,7 +89,7 @@ internal class DefaultPuzzleFactoryTest {
         val puzzle = arrange9x9()
 
         assertNotNull(puzzle)
-        assertEquals(9, groupCount(puzzle))
+        assertEquals(9, puzzle.countGroups())
     }
 
     @Test

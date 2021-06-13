@@ -13,11 +13,10 @@ internal fun createCandidate(type: String, size: Int, vararg tiles: Int): Puzzle
             }
 
             puzzle.append(list.joinToString("=", "SumoCueV1="))
-            println(puzzle)
         }
-        "samurai" -> repeat(5) {
+        "samurai" -> repeat(5) { grid ->
             range.forEach { index ->
-                puzzle.append(if (tiles.contains(index)) "1" else "0")
+                puzzle.append(if (tiles.contains(grid * 81 + index)) "1" else "0")
             }
 
             puzzle.append("\n")
@@ -26,6 +25,8 @@ internal fun createCandidate(type: String, size: Int, vararg tiles: Int): Puzzle
             puzzle.append(if (tiles.contains(index)) "1" else "0")
         }
     }
+
+    println(puzzle)
 
     return PuzzleCandidate("test", type, puzzle.toString())
 }
