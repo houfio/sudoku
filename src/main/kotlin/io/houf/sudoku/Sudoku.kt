@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent
 import java.util.*
 import javax.swing.JFrame
 import javax.swing.JPanel
+import kotlin.reflect.KClass
 
 class Sudoku(private val frame: JFrame) : JPanel() {
     private val loop = Loop.start(
@@ -38,7 +39,7 @@ class Sudoku(private val frame: JFrame) : JPanel() {
         addMouseWheelListener(listener)
         addKeyListener(listener)
 
-        push(OverviewController::class.java)
+        push(OverviewController::class)
     }
 
     fun stop() {
@@ -46,9 +47,9 @@ class Sudoku(private val frame: JFrame) : JPanel() {
         frame.dispatchEvent(WindowEvent(frame, WindowEvent.WINDOW_CLOSING))
     }
 
-    fun <T : Controller<T>> push(cls: Class<out T>) {
+    fun <T : Controller<T>> push(cls: KClass<out T>) {
         try {
-            val controller = cls.getConstructor(Sudoku::class.java).newInstance(this)
+            val controller = cls.java.getConstructor(this::class.java).newInstance(this)
 
             controllers.push(controller)
             widget = controller.createView()

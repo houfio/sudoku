@@ -10,12 +10,12 @@ import io.houf.sudoku.view.impl.OverviewView
 import org.koin.core.component.inject
 
 class OverviewController(sudoku: Sudoku) : Controller<OverviewController>(sudoku) {
-    private val puzzleReader: PuzzleReader by inject()
+    private val puzzleReader by inject<PuzzleReader>()
     val puzzles = puzzleReader.readPuzzles().sortedBy { it.fullName }
 
     fun start(candidate: PuzzleCandidate) {
         sudoku.game.execute(StartCommand(candidate))
-        sudoku.push(PuzzleController::class.java)
+        sudoku.push(PuzzleController::class)
     }
 
     override fun createView(): View<OverviewController> {

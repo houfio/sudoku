@@ -27,6 +27,14 @@ package widget {
     ..
     {abstract} +draw(Graphics2D)
     {abstract} +update()
+    +iterator(): Iterator<Widget>
+  }
+
+  class WidgetIterator {
+    Iterator
+    ..
+    +hasNext(): Boolean
+    +next(): Puzzle
   }
 
   class WidgetGroup extends Widget {
@@ -57,8 +65,10 @@ package widget {
   }
 
   WidgetGroup *-- Widget
+  Widget .l.> WidgetIterator
 
   note top of WidgetGroup: Composite
+  note right of Widget: Iterator
 }
 
 package view {
@@ -91,44 +101,8 @@ package model {
     ..
   }
 
-  package command {
-    interface Command {
-      Command
-      ..
-      +execute(GameData): Boolean
-      +rollback()
-    }
-
-    class CommandExecutor {
-      Invoker
-      ..
-      +execute(Command)
-      +rollback()
-      +empty(): Boolean
-    }
-
-    class EnterCommand extends Command {
-      Command
-      ..
-    }
-
-    class StartCommand extends Command {
-      Command
-      ..
-    }
-
-    class SwitchCommand extends Command {
-      Command
-      ..
-    }
-
-    Command *-- CommandExecutor
-
-    note right of Command: Command
-  }
-
   package tile {
-    class Tile {
+    abstract class Tile {
       +accept(TileVisitor)
     }
 
@@ -144,15 +118,29 @@ package model {
       ..
     }
 
+    class StaticTile extends Tile {
+      Element
+      ..
+    }
+
+    PositionedTile --> Tile
+    PositionedTile --> Position
+
+    note top of Tile: Template
+  }
+
+  package visitor {
     interface TileVisitor {
       Visitor
       ..
-      +visitDefault(DefaultTile)
+      +visit(DefaultTile)
+      +visit(StaticTile)
     }
 
-    TileVisitor --> Tile
-    PositionedTile --> Tile
-    PositionedTile --> Position
+    class ResetTileVisitor extends TileVisitor {
+      Concrete Visitor
+      ..
+    }
 
     note right of TileVisitor: Visitor
   }
@@ -216,10 +204,48 @@ package model {
 
     Puzzle *-- Tile
     Puzzle --> Solver
+    Puzzle .u.> ResetTileVisitor
 
     PuzzleCandidate -d[hidden]-> PuzzleFactory
 
     note left of PuzzleFactory: Abstract Factory
+  }
+
+  package command {
+    interface Command {
+      Command
+      ..
+      +execute(GameData): Boolean
+      +rollback()
+    }
+
+    class CommandExecutor {
+      Invoker
+      ..
+      +execute(Command)
+      +rollback()
+      +empty(): Boolean
+    }
+
+    class EnterCommand extends Command {
+      Command
+      ..
+    }
+
+    class StartCommand extends Command {
+      Command
+      ..
+    }
+
+    class SwitchCommand extends Command {
+      Command
+      ..
+    }
+
+    Command *-- CommandExecutor
+    StartCommand ..> PuzzleFactory
+
+    note right of Command: Command
   }
 
   package state {
