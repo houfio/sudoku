@@ -10,6 +10,10 @@ import io.houf.sudoku.model.tile.impl.StaticTile
 
 class JigsawPuzzleFactory : PuzzleFactory {
     override fun createPuzzle(candidate: PuzzleCandidate): Puzzle? {
+        if (candidate.content.length < 10) {
+            return null
+        }
+
         val puzzle = Puzzle(9, DefaultSolver())
         val content = candidate.content.substring(10).trim().split("=")
 
